@@ -1,7 +1,6 @@
 # jsbridge (功能需求)
-------
 
-** 没事找事APP `WebView`与`UIView` `jsbridge` **
+**没事找事APP `WebView`与`UIView` `jsbridge`**
 
 *   城市
     *   得到城市地点和城市ID
@@ -9,7 +8,7 @@
 *   分享
     *   `js`打开`app`分享`app`分享后回调
 
-**  WebView功能实现 ***
+**WebView功能实现**
 1.  浏览器`user-agent`的规范
 -   打开浏览器判断域名是否属于允许的域名 如果允许种 `Cookie`
 -   浏览器关闭按钮（参考微信）
