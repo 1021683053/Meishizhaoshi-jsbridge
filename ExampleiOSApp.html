@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+    <head>
+    <title>JS Native Demo</title>
+    </head>
+
+    <body>
+<h1>JS Demo</h1>
+
+	<script>
+	window.onerror = function(err) {
+
+		log('window.onerror: ' + err)
+	}
+
+  function setupWebViewJavascriptBridge(callback) {
+
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+  }
+
+  setupWebViewJavascriptBridge(function(bridge) {
+
+// 注册
+
+// 下啦刷新动作 + pass
+bridge.registerHandler('refreshTriggered', function(data, responseCallback) {
+    alert('refreshTriggered');
+})
+
+// alert与confirm的按钮事件回调, 这些方法的名称就是下边传给客户端的confirmMethodName, 返
+// 回的结果就是confirmMethodIdentifier标识
+bridge.registerHandler('alertClick', function(data, responseCallback) {
+    alert(data['identifier']);
+})
+
+bridge.registerHandler('confirmClick', function(data, responseCallback) {
+    alert(data['identifier']);
+})
+
+bridge.registerHandler('confirmCancel', function(data, responseCallback) {
+    alert(data['identifier']);
+})
+
+// 调用
+
+// 获取城市名称ID + pass
+// bridge.callHandler('getCityNameAndId', {}, function(response) {
+//
+//     alert(response['cityName'] + '\n' + response['cityId']);
+// })
+
+// 打开城市选择界面 + pass
+// bridge.callHandler('openCityChooseView', {}, function(response) {
+//
+//     alert(response['cityName'] + '\n' + response['cityId']);
+// })
+//
+// 打开分享界面 + pass
+// bridge.callHandler('showShareView', {text:'分享内容'}, function(response) {
+//
+//     alert('shareResult \n' + response['data'] + '\n' + response['statu']);
+// })
+//
+// // 刷新当前界面 + question
+// bridge.callHandler('refreshWebView', {}, function(response) {
+//
+//
+// })
+//
+// 主动触发下拉刷新 + pass
+// bridge.callHandler('pullRefreshWebView', {}, function(response) {
+//
+// })
+//
+// 主动停止下拉刷新 + pass
+// bridge.callHandler('stopPullRefreshWebView', {}, function(response) {
+//
+// })
+//
+// // 获取用户token + pass
+// bridge.callHandler('getUserToken', {}, function(response) {
+//
+//     alert(response['token']);
+// })
+//
+// 显示弹窗 + pass
+// var alert_j = {
+//   type:'alert',
+//   confirmTitle:'Yep!',
+//   confirmMethodName:'alertClick',
+//   confirmMethodIdentifier:'alert1',
+//   title:'i\'m alert',
+//   message:'Hello, this is Demo.'
+// }
+//
+// bridge.callHandler('showAlert', alert_j, function(response) {
+//
+// })
+//
+// 显示确认框 + pass
+// var confirm_j = {
+//   type:'confirm',
+//   confirmTitle:'OK',
+//   cancelTitle:'NO',
+//   confirmMethodName:'confirmClick',
+//   confirmMethodIdentifier:'confirm1',
+//   cancelMethodName:'confirmCancel',
+//   cancelMethodIdentifier:'confirm1',
+//   title:'this a confirm',
+//   message:'this is the message'
+// }
+//
+// bridge.callHandler('showConfirm', confirm_j, function(response) {
+//
+// })
+//
+// // 显示加载动画 + pass
+// bridge.callHandler('showLoading', {text:'Hi'}, function(response) {
+//
+// })
+//
+// // 隐藏加载动画 + pass
+// bridge.callHandler('hideLoading', {}, function(response) {
+//
+// })
+
+})
+
+	</script>
+
+</body></html>
