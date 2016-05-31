@@ -64,27 +64,22 @@ js注入参考 for android
                 {
                     "file": "./lib/css/base.css",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 },
                 {
                     "file": "./lib/js/base.js",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 },
                 {
                     "file": "./lib/img/logo.jpg",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 },
                 {
                     "file": "./lib/fonts/huicuifont.ttf",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 },
                 {
                     "file": "./lib/framework/jquery/jquery1.9.1.min.js",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 }
             ],
             "config": {
@@ -105,27 +100,22 @@ js注入参考 for android
                 {
                     "file": "./lib/css/common.css",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 },
                 {
                     "file": "./lib/js/main.js",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 },
                 {
                     "file": "./lib/img/index.png",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 },
                 {
                     "file": "./lib/css/main.css",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 },
                 {
                     "file": "./index.html",
                     "url": "远程URL",
-                    "opt": "a/w/d"
                 }
             ],
             "config": {
