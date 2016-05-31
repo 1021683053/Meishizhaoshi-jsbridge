@@ -55,7 +55,7 @@ js注入参考 for android
 	]
     "module": [
         {
-            "id": "common", // 基础业务包, 包括公用的JS, CSS, Resources等。
+            "mid": "common", // 基础业务包, 包括公用的JS, CSS, Resources等。
             "urls": {},
 			"status" : "OK/DEL OK的就是正常，DEL的就需要执行删除整个模块的操作",
             "version":"c668ce2087",
@@ -93,7 +93,7 @@ js注入参考 for android
             }
         },
         {
-            "id": "meishiModule",
+            "mid": "meishiModule",
 			"status" : "OK",
             "version": "7ceab2534d",
 			"opt":"D",
