@@ -41,7 +41,7 @@ js注入参考 for android
 
 ## 总控制配置
 
-```json
+```
 {
 	"bizUri":"server.zhaogeshi.com",
 	"imageUri":"static.zhaogeshi.com",
