@@ -48,10 +48,18 @@ js注入参考 for android
 	"userUri":"user.zhaogeshi.com",
 	"hotFixJS" : "var testVC=getNewVC();....", //不需要换行
 	"imageURL" : "http://image.zhaogeshi.com/a.png", //广告图片地址 (先忽略掉) 
-    "version": 1,
+    	"version": 1,
 	domains:[ //白名单
 		"tpl.zhaogeshi.me",
 		"static.zhaogeshi.me"
+	],
+	"apiVersion" : [
+		{
+			"logon.json" : @"v2"
+		},
+		{
+			"regist.json" : @"v3.1"
+		}
 	]
     "module": [
         {
