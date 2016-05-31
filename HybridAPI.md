@@ -46,16 +46,16 @@ js注入参考 for android
 	"bizUri":"server.zhaogeshi.com",
 	"imageUri":"static.zhaogeshi.com",
 	"userUri":"user.zhaogeshi.com",
-	"hotFixJS" : "var testVC=getNewVC();....", #不需要换行
-	"imageURL" : "http://image.zhaogeshi.com/a.png", #广告图片地址 (先忽略掉) 
+	"hotFixJS" : "var testVC=getNewVC();....", //不需要换行
+	"imageURL" : "http://image.zhaogeshi.com/a.png", //广告图片地址 (先忽略掉) 
     "version": 1,
-	domains:[ # 白名单
+	domains:[ //白名单
 		"tpl.zhaogeshi.me",
 		"static.zhaogeshi.me"
 	]
     "module": [
         {
-            "id": "common", # 基础业务包, 包括公用的JS, CSS, Resources等。
+            "id": "common", // 基础业务包, 包括公用的JS, CSS, Resources等。
             "urls": {},
 			"status" : "OK/DEL OK的就是正常，DEL的就需要执行删除整个模块的操作",
             "version":"c668ce2087",
