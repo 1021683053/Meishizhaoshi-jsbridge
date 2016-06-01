@@ -43,44 +43,50 @@ js注入参考 for android
 
 ```
 {
-	"bizUri":"server.zhaogeshi.com",
-	"imageUri":"static.zhaogeshi.com",
-	"userUri":"user.zhaogeshi.com",
-	"hotFixJS" : "var testVC=getNewVC();....", //不需要换行
-	"imageURL" : "http://image.zhaogeshi.com/a.png", //广告图片地址 (先忽略掉) 
-    	"version": 1,
-	domains:[ //白名单
-		"tpl.zhaogeshi.me",
-		"static.zhaogeshi.me"
-	],
-	"apiVersion" : [
-		{
-			"logon.json" : @"v2"
-		},
-		{
-			"regist.json" : @"v3.1"
-		}
-	],
+    "bizUri": "server.zhaogeshi.com",
+    "imageUri": "static.zhaogeshi.com",
+    "userUri": "user.zhaogeshi.com",
+    "hotFixJS": "var a = 1;",
+    "imageURL": "http://bbs.feng.com/data/attachment/forum/201509/01/125251v9xkyyyhyaod99ye.png",
+    "imageTimeout": 4,
+    "version": 1,
+    "domains": [
+        "tpl.zhaogeshi.me",
+        "static.zhaogeshi.me",
+        "10.0.0.125"
+    ],
+    "apiVersion": [
+        {
+            "api": "logon.json",
+            "method": "GET",
+            "version": "v2.0"
+        },
+        {
+            "api": "regist.json",
+            "method": "POST",
+            "version": "v3.1"
+        }
+    ],
     "module": [
         {
-            "mid": "common", // 基础业务包, 包括公用的JS, CSS, Resources等。
+            "mid": "bootstrap",
             "urls": {},
-            "version":"c668ce2087",
-	    "opt":"N" N/D 分别代表正常或者删除",
-            "packageurl":"http://package.zhaogeshi.me/common/94dd4b2034_c668ce2087.zip",
+            "version": "c901",
+            "opt": "N",
+            "packageurl": "http://devdylan.cn/bootstrap.zip",
             "config": {
                 "key": "value"
             }
         },
         {
-            "mid": "meishiModule",
-            "version": "7ceab2534d",
-            "opt":"D",
-            "packageurl":"http://package.zhaogeshi.me/common/7ceab2534d_12c7fac237.zip",
+            "mid": "LeafModules",
+            "version": "ib41",
+            "opt": "N",
+            "packageurl": "http://devdylan.cn/LeafModules.zip",
             "urls": {
-                "tplid": "index.html",
-                "cart": "cart/index.html",
-                "goodsinfo": "./goodsinfo/index.html"
+                "enter": "index.html",
+                "classPayment": "classPayment.html",
+                "detail": "detail/detail.html"
             },
             "config": {
                 "key": "value"
