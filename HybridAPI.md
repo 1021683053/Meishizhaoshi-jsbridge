@@ -16,7 +16,7 @@ http://tpl.zhaogeshi.me/{bname}/{tplid}.tpl?{param}
 
 js注入参考 for ios
 
-```object-c
+```javascript
 /**===========================JS  注入====================================*/
 	[self.webView stringByEvaluatingJavaScriptFromString:@"var script = document.createElement('script');"
 	 "script.type = 'text/javascript';"
@@ -27,7 +27,7 @@ js注入参考 for ios
 
 js注入参考 for android
 
-```android
+```javascript
 /**===========================JS  注入====================================*/
     String jsstr="var script = document.createElement('script');\n";
     jsstr += "script.type = 'text/javascript';\n";
@@ -41,7 +41,7 @@ js注入参考 for android
 
 ## 总控制配置
 
-```
+```json
 {
     "bizUri": "server.zhaogeshi.com",
     "imageUri": "static.zhaogeshi.com",
@@ -102,7 +102,7 @@ js注入参考 for android
 
 ## html5 前端文件加载
 
-```HTML5
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
