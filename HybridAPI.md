@@ -60,7 +60,7 @@ js注入参考 for android
 		{
 			"regist.json" : @"v3.1"
 		}
-	]
+	],
     "module": [
         {
             "mid": "common", // 基础业务包, 包括公用的JS, CSS, Resources等。
@@ -68,28 +68,6 @@ js注入参考 for android
             "version":"c668ce2087",
 	    "opt":"N" N/D 分别代表正常或者删除",
             "packageurl":"http://package.zhaogeshi.me/common/94dd4b2034_c668ce2087.zip",
-            "files": [
-                {
-                    "file": "./lib/css/base.css",
-                    "url": "远程URL",
-                },
-                {
-                    "file": "./lib/js/base.js",
-                    "url": "远程URL",
-                },
-                {
-                    "file": "./lib/img/logo.jpg",
-                    "url": "远程URL",
-                },
-                {
-                    "file": "./lib/fonts/huicuifont.ttf",
-                    "url": "远程URL",
-                },
-                {
-                    "file": "./lib/framework/jquery/jquery1.9.1.min.js",
-                    "url": "远程URL",
-                }
-            ],
             "config": {
                 "key": "value"
             }
@@ -104,28 +82,6 @@ js注入参考 for android
                 "cart": "cart/index.html",
                 "goodsinfo": "./goodsinfo/index.html"
             },
-            "files": [
-                {
-                    "file": "./lib/css/common.css",
-                    "url": "远程URL",
-                },
-                {
-                    "file": "./lib/js/main.js",
-                    "url": "远程URL",
-                },
-                {
-                    "file": "./lib/img/index.png",
-                    "url": "远程URL",
-                },
-                {
-                    "file": "./lib/css/main.css",
-                    "url": "远程URL",
-                },
-                {
-                    "file": "./index.html",
-                    "url": "远程URL",
-                }
-            ],
             "config": {
                 "key": "value"
             }
