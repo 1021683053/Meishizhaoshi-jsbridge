@@ -48,10 +48,12 @@ js注入参考 for android
     "userUri": "user.zhaogeshi.com",
     "hotFixJS": "var a = 1;",
     "imageURL": "http://bbs.feng.com/data/attachment/forum/201509/01/125251v9xkyyyhyaod99ye.png",
-    "imageTimeout": 4,
+    "imageTimeout": 2,
     "version": 1,
     "domains": [
         "tpl.zhaogeshi.me",
+        "server.zhaogeshi.com",
+        "user.zhaogeshi.com",
         "static.zhaogeshi.me",
         "10.0.0.125"
     ],
@@ -73,20 +75,20 @@ js注入参考 for android
             "urls": {},
             "version": "c901",
             "opt": "N",
-            "packageurl": "http://devdylan.cn/bootstrap.zip",
+            "packageurl": "http://um.devdylan.cn/bootstrap.zip",
             "config": {
                 "key": "value"
             }
         },
         {
             "mid": "LeafModules",
-            "version": "ib41",
+            "version": "ib42",
             "opt": "N",
-            "packageurl": "http://devdylan.cn/LeafModules.zip",
+            "packageurl": "http://um.devdylan.cn/LeafModules.zip",
             "urls": {
-                "enter": "index.html",
-                "classPayment": "classPayment.html",
-                "detail": "detail/detail.html"
+                "enter.tpl": "index.html",
+                "classPayment.tpl": "classPayment.html",
+                "detail.tpl": "detail/detail.html"
             },
             "config": {
                 "key": "value"
@@ -104,43 +106,23 @@ js注入参考 for android
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Document test</title>
-    <!-- //加载公共前端框架js -->
-    <script type="text/javascript" charset="utf-8" src="../common/lib/framework/jquery/jquery1.9.1.min.js"></script>
-
-    <!-- //加载公共资源js -->
-    <script type="text/javascript" charset="utf-8" src="../common/lib/js/base.js"></script>
-
-    <!-- //加载私有资源js -->
-    <script type="text/javascript" charset="utf-8" src="./lib/js/main.js"></script>
-
-    <!-- //加载公共前端框架css -->
-    <link rel="stylesheet" type="text/css" href="../common/lib/framework/bootstrap/bootstrap.min.css">
-
+    <meta charset="UTF-8">
+    <title>Document test</title>
     <!-- //加载公共资源css -->
-    <link rel="stylesheet" type="text/css" href="../common/lib/css/base.css">
-
-    <!-- //加载私有资源css -->
-    <link rel="stylesheet" type="text/css" href="./lib/css/main.css">
-
-    <!-- //css使用公共字体库文件 -->
-    <style type="text/css" media="screen">
-    @font-face {
-    	font-family: 'huicuiFont';
-    	src: url('../common/lib/fonts/huicuifont.ttf')  format('truetype'), /* Safari, Android, iOS */
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.css">
 </head>
 <body>
-    <!-- //加载公共资源, 注意路径的使用 -->
-	<img src="../common/lib/img/logo.jpg" />
-
-    <!-- //加载私有资源 -->
-    <img src="./lib/img/index.png" />
-
+	
+	<form class="form-search">
+	  	<input type="text" class="input-medium search-query">
+  		<button type="submit" class="btn btn-info">Search</button>
+	</form>
+	
+	<button class="btn btn-large btn-block btn-primary" type="button">Block level button</button>
+	<button class="btn btn-large btn-block" type="button">Block level button</button>
+	
 </body>
 </html>
 ```
