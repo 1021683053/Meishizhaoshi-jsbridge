@@ -5,9 +5,53 @@ IOS 参考SDK [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJ
 Android 参考SDK [WebViewJavascriptBridge](https://github.com/gzsll/WebViewJavascriptBridge)
 
 
+
+
 ** 相关文章 **
  - [Hybrid 开发文档](http://johnwong.github.io/mobile/2015/04/20/cross-platform-and-hybrid.html)
  - [HTML/Android/Chrome-WebViewJavascriptBridge](https://github.com/fangj/WebViewJavascriptBridge)
+
+## user-agent
+Android&IOS
+
+`[系统user-agent][空格]Meishizhaoshi/[版本号]`
+
+example
+
+Android: `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.23 Mobile Safari/537.36 Meishizhaoshi/3.4.1`
+
+IOS: `Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 Meishizhaoshi/3.4.1`
+
+_*注：向后追加版本号*_
+
+
+## package
+
+```
+    npm install
+    npm run bulid
+    .
+    .
+    .
+    `dist/jsbridge.js`
+    `dist/jsbridge.min.js`
+```
+## useage
+    global variable is `bridge`
+    - require.js, seajs
+    - window.bridge
+
+## client
+    bridge.client
+    ```
+        /*
+         * return
+         * version [!0][app version / [0]not in Meishizhaoshi app
+         * isAndroid true / false
+         * isiOS true / false
+         * name Meishizhaoshi / 0
+         */
+    ```
 
 
 ## 功能需求
