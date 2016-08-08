@@ -5,11 +5,6 @@
  */
 !(function () {
 
-    var UA = navigator.userAgent;
-    var bridge = function(){
-
-    };
-
     //返回浏览器信息
     var Client = function( APP, UA){
         if( this == window ){
@@ -29,6 +24,28 @@
         };
     };
 
+
+    //JS Bridge 桥梁构建
+    var UA = navigator.userAgent,
+        client = new Client('Meishizhaoshi', UA);
+
+    var Bridge = function(){
+        this.inapp = client.version || false;
+    };
+
+    Bridge.prototype.setup = function(){
+        self = this;
+        if( this.inapp ){
+            WebViewJavascriptBridge.call(this, this.native);
+        }else{
+            
+        }
+    };
+
+    Bridge.prototype.native = function(native){
+        return native;
+    }
+
     //柯理化
     function currying(fn) {
         var args = [].slice.call(arguments, 1);
@@ -38,8 +55,21 @@
         };
     };
 
+    //Webview JS注入
+    function WebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    };
+
     //暴露接口
-    bridge.client = new Client('Meishizhaoshi', UA);
+    var bridge = new Bridge();
+    bridge.client = client;
     bridge.isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1;
     bridge.isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 

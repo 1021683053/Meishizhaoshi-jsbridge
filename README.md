@@ -47,9 +47,8 @@ _*注：向后追加版本号*_
         /*
          * return
          * version [!0][app version / [0]not in Meishizhaoshi app
-         * isAndroid true / false
-         * isiOS true / false
          * name Meishizhaoshi / 0
+         * category M/C
          */
     ```
 

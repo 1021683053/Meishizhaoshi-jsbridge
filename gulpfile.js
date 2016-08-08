@@ -4,8 +4,8 @@ var rename = require("gulp-rename");
 var concat = require('gulp-concat');
 var sources = [
     'src/intro.js',
-    'src/bridge.js',
     'src/client.js',
+    'src/bridge.js',
     'src/util.js',
     'src/exports.js',
     'src/outro.js'
