@@ -14,13 +14,13 @@ Android 参考SDK [WebViewJavascriptBridge](https://github.com/gzsll/WebViewJava
 ## user-agent
 Android&IOS
 
-`[系统user-agent][空格]Meishizhaoshi/[版本号]`
+`[系统user-agent][空格]Meishizhaoshi/[M/C 商家版/学生版]_[版本号]`
 
 example
 
-Android: `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.23 Mobile Safari/537.36 Meishizhaoshi/3.4.1`
+Android: `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.23 Mobile Safari/537.36 Meishizhaoshi/C_3.4.1`
 
-IOS: `Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 Meishizhaoshi/3.4.1`
+IOS: `Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 Meishizhaoshi/M_3.4.1`
 
 _*注：向后追加版本号*_
 

@@ -1,27 +1,18 @@
     //返回浏览器信息
-    var client =
-    function( appname, UA){
-        var _client = {},
-            _isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1,
-            _isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-            _version_reg = make_reg( appname, '/(<%flg%>)\/(\d+(?:.\d+(?:.\d+)?)?)/'),
-            _match = UA.match(_version_reg);
+    var Client = function( APP, UA){
+        if( this == window ){
+            return new Client(APP, UA);
+        };
+        var match = null,
+            reg = makereg(APP, '(<%flg%>)\/([M|C])_(\\d+(?:.\\d+(?:.\\d+)?)?)');
 
-        _client.version = version(UA) || 0;
-        _client.name = name(UA) || 'Browser';
-        _client.isAndroid = _isAndroid;
-        _client.isiOS = _isiOS;
-        function version(){
-            return !_match ? null : match[2];
-        }
+        match = UA.match(reg);
+        this.version = (!match ? null : match[3]) || 0;
+        this.category = (!match ? null : match[2]) || 0;
+        this.name = (!match ? null : match[1]) || 'Browser';
 
-        function name(){
-            return !_match ? null : match[1];
-        }
-
-        function make_reg( flg, str){
-            var reg_str = str.replace(/<\%flg\%>/, flg);
-            return new RegExp(reg_str);
-        }
-        return _client;
+        function makereg(flg, str){
+            var regstr = str.replace(/<\%flg\%>/, flg);
+            return new RegExp(regstr);
+        };
     };
