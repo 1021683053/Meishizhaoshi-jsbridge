@@ -1,4 +1,16 @@
-# jsbridge (功能需求)
+# jsbridge
+
+IOS 参考SDK [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge)
+
+Android 参考SDK [WebViewJavascriptBridge](https://github.com/gzsll/WebViewJavascriptBridge)
+
+
+** 相关文章 **
+ - [Hybrid 开发文档](http://johnwong.github.io/mobile/2015/04/20/cross-platform-and-hybrid.html)
+ - [HTML/Android/Chrome-WebViewJavascriptBridge](https://github.com/fangj/WebViewJavascriptBridge)
+
+
+## 功能需求
 
 **没事找事APP `WebView`与`UIView` `jsbridge`**
 
@@ -218,4 +230,3 @@ url|String|目标URL
 参数名称     |  参数类型  | 参数描述
 ------------|----------|------------
 token|String|token字串
-
