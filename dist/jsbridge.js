@@ -11,29 +11,31 @@
 
     //返回浏览器信息
     var client =
-    function(){
-        var client = {};
-        var UA = navigator.userAgent;
-        var isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1;
-        var isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    function( appname, UA){
+        var _client = {},
+            _isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1,
+            _isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+            _version_reg = make_reg( appname, '/(<%flg%>)\/(\d+(?:.\d+(?:.\d+)?)?)/'),
+            _match = UA.match(_version_reg);
 
-        client.version = version(UA) || 0;
-        client.name = name(UA) || 'Browser';
-        client.isAndroid = isAndroid;
-        client.isiOS = isiOS;
+        _client.version = version(UA) || 0;
+        _client.name = name(UA) || 'Browser';
+        _client.isAndroid = _isAndroid;
+        _client.isiOS = _isiOS;
+        function version(){
+            return !_match ? null : match[2];
+        }
 
-        function version(UA){
-            var match = UA.match(/(Meishizhaoshi)\/(\d+(?:.\d+(?:.\d+)?)?)/);
-            return !match ? null : match[2];
+        function name(){
+            return !_match ? null : match[1];
         }
-        function name(UA){
-            var match = UA.match(/(Meishizhaoshi)\/(\d+(?:.\d+(?:.\d+)?)?)/);
-            return !match ? null : match[1];
+
+        function make_reg( flg, str){
+            var reg_str = str.replace(/<\%flg\%>/, flg);
+            return new RegExp(reg_str);
         }
-        return client;
+        return _client;
     };
-
-    bridge.client = client();
 
     //柯理化
     function currying(fn) {
@@ -44,6 +46,8 @@
         };
     };
 
+    bridge.client = client('Meishizhaoshi', navigator.userAgent);
+
     // RequireJS && SeaJS
     if (typeof define === 'function') {
         define(function() {
@@ -53,7 +57,7 @@
     // NodeJS
     } else if (typeof exports !== 'undefined') {
         module.exports = null;
-        
+
     // Bowser
     } else {
         this.bridge = bridge;
