@@ -56,7 +56,7 @@ localModuleVersion: "commonModule=3fv5cd&detailModule=8vg3fc"
 
 #### 返回值
 
-```json
+```
 {
     "version": "MSApp Version, User String. (Git short version)",
     "opt": "N", # App options. M: Cover local files. N: Nothing handler. D: Delete.
