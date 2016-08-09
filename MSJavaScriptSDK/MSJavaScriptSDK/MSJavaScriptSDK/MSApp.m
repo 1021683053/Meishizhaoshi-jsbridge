@@ -46,7 +46,6 @@
 
 - (void) startWithOptions: (NSDictionary *) options {
     [MSWebViewUtil MakeUpWebViewMemoryLeak];
-    [MSWebViewUtil AppendCustomUserAgent:@" Meishizhaoshi/M_3.6.1"];
 }
 
 + (void) disableLog {
@@ -60,6 +59,10 @@
 + (UIViewController *) appWithURLString: (NSString *) URLString {
     MSWebViewController * mswvc = [[MSWebViewController alloc] initWithURLString:URLString];
     return (UIViewController *)mswvc;
+}
+
++ (void) AppendCustomUserAgent: (NSString *) userAgent {
+    [MSWebViewUtil AppendCustomUserAgent:userAgent];
 }
 
 //------------------------------------------------------------------------------

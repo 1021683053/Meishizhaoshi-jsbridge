@@ -20,6 +20,7 @@
     // Override point for customization after application launch.
 
     [MSApp startAppWithKey:@"k56ydc-adr" sec:@"89v"];
+    [MSApp AppendCustomUserAgent:@" Meishizhaoshi/M_3.6.1"];
 
     return YES;
 }

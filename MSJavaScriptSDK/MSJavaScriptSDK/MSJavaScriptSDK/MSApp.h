@@ -41,4 +41,11 @@
  */
 + (UIViewController *) appWithURLString: (NSString *) URLString;
 
+/*!
+ *  @brief Append custom user-agent to web container.
+ *
+ *  @param userAgent U custom user agent string.
+ */
++ (void) AppendCustomUserAgent: (NSString *) userAgent;
+
 @end
