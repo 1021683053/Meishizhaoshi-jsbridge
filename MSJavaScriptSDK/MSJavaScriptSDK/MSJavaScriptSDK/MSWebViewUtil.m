@@ -28,12 +28,12 @@ NSString * const kMSWebViewLocalModulesVersionStr = @"kMSWebViewLocalModulesVers
     [webView removeFromSuperview];
 }
 
-+ (void) AppendCustomUserAgent: (NSString *) userAgent {
++ (void) AppendCustomUserAgent: (NSString *) userA {
     @autoreleasepool {
         UIWebView* tempWebView = [[UIWebView alloc] initWithFrame:CGRectZero];
         NSString* userAgent = [tempWebView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
         NSString *ua = [NSString stringWithFormat:@"%@%@",
-                        userAgent, userAgent];
+                        userAgent, userA];
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent" : ua}];
     }
 }

@@ -10,6 +10,8 @@
 
 @interface MSAPI : NSObject
 
++ (void) setCustomHeader: (NSDictionary *) headerFields;
+
 + (void) verifyAppKey: (NSString *) appKey
                   sec: (NSString *) appSec
         completeBlock: (void (^)(NSURLResponse *, id responseObject, NSError *)) completeBlock;

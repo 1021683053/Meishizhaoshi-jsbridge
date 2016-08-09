@@ -172,6 +172,7 @@
 - (void) webViewDidFinishLoad: (UIWebView *) webView {
     self->_loadState = MSWebVCLoadState_Finished;
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    NSLog(@"%@", [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"]);
 }
 
 - (void) webView: (UIWebView *) webView didFailLoadWithError: (NSError *) error {
