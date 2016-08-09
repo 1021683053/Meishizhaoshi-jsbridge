@@ -36,16 +36,21 @@
         document.getElementById('bridgeBtm').onclick = function(){
             var flag = this.getAttribute('attr-data');
             Proxy(function(bridge){
-                if( flag ){
-                    bridge.callHandler("openRechargeList", {},function(res){
-                        alert(JSON.stringify(res));
-                    });
-                }else{
-                    bridge.callHandler("openPositionList", {}, function(res){
-                        alert(JSON.stringify(res));
-                    });
-                }
+                bridge.callHandler("getCityNameAndId", {}, function(res){
+                    alert("");
+                });
             });
+            // Proxy(function(bridge){
+            //     if( flag ){
+            //         bridge.callHandler("openRechargeList", {},function(res){
+            //             alert(JSON.stringify(res));
+            //         });
+            //     }else{
+            //         bridge.callHandler("openPositionList", {}, function(res){
+            //             alert(JSON.stringify(res));
+            //         });
+            //     }
+            // });
         }
 
         //设置JavaScript brige
