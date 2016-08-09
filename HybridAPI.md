@@ -60,12 +60,6 @@ localModuleVersion: "commonModule=3fv5cd&detailModule=8vg3fc"
 {
     "version": "MSApp Version, User String. (Git short version)",
     "opt": "N", # App options. M: Cover local files. N: Nothing handler. D: Delete.
-    "domains": [ 					
-        "tpl.zhaogeshi.me",
-        "server.zhaogeshi.com",
-        "user.zhaogeshi.com",
-        "static.zhaogeshi.me",
-    ],							#White List, Should not be IPV4 Address. (iOS Review need IPV6).
     "module": [					 #Sub modules.
         {
             "mid": "bootstrap",    # Module id.
