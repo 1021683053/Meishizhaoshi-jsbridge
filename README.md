@@ -8,8 +8,8 @@ Android 参考SDK [WebViewJavascriptBridge](https://github.com/gzsll/WebViewJava
 
 
 ** 相关文章 **
- - [Hybrid 开发文档](http://johnwong.github.io/mobile/2015/04/20/cross-platform-and-hybrid.html)
- - [HTML/Android/Chrome-WebViewJavascriptBridge](https://github.com/fangj/WebViewJavascriptBridge)
+- [Hybrid 开发文档](http://johnwong.github.io/mobile/2015/04/20/cross-platform-and-hybrid.html)
+- [HTML/Android/Chrome-WebViewJavascriptBridge](https://github.com/fangj/WebViewJavascriptBridge)
 
 ## user-agent
 Android&IOS
@@ -43,14 +43,14 @@ _*注：向后追加版本号*_
 
 ## client
     bridge.client
-    ```
+    ​```
         /*
          * return
          * version [!0][app version / [0]not in Meishizhaoshi app
          * name Meishizhaoshi / 0
          * category M/C
          */
-    ```
+    ​```
 
 
 ## 功能需求
@@ -77,7 +77,6 @@ _*注：向后追加版本号*_
 
 *最后一个功能比较重要，需要整体规划页面，和页面跳转，每个页面需要有传参*
 
-
 ***
 
 1.获取城市地点和城市ID
@@ -92,10 +91,10 @@ _*注：向后追加版本号*_
 
 返回值
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-cityName     |    String       |               城市名称
-cityId|String|城市ID
+| 参数名称     | 参数类型   | 参数描述 |
+| -------- | ------ | ---- |
+| cityName | String | 城市名称 |
+| cityId   | String | 城市ID |
 
 ***
 
@@ -111,10 +110,10 @@ cityId|String|城市ID
 
 返回值
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-cityName|String|城市名称
-cityId|String|城市ID
+| 参数名称     | 参数类型   | 参数描述 |
+| -------- | ------ | ---- |
+| cityName | String | 城市名称 |
+| cityId   | String | 城市ID |
 
 ***
 
@@ -124,16 +123,16 @@ cityId|String|城市ID
 
 参数
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-text|string|分享的文字内容
+| 参数名称 | 参数类型   | 参数描述    |
+| ---- | ------ | ------- |
+| text | string | 分享的文字内容 |
 
 返回值
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-statu     |    bool       | 是否分享成功
-data|Object|友盟返回的数据
+| 参数名称  | 参数类型   | 参数描述    |
+| ----- | ------ | ------- |
+| statu | bool   | 是否分享成功  |
+| data  | Object | 友盟返回的数据 |
 
 ***
 
@@ -191,7 +190,6 @@ data|Object|友盟返回的数据
 ------------|----------|------------
 ||
 
-
 ***
 
 7.获取用户token
@@ -206,9 +204,9 @@ data|Object|友盟返回的数据
 
 返回值
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-token|String|token字串
+| 参数名称  | 参数类型   | 参数描述    |
+| ----- | ------ | ------- |
+| token | String | token字串 |
 
 ***
 
@@ -218,25 +216,25 @@ token|String|token字串
 
 参数
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-type|String|'alert'或者'confirm'
-confirmMethodName|String|确认按钮的回调方法<必须>
-confirmMethodIdentifier|String|确认按钮回调的标识<必须>
-cancelMethodName|String|取消按钮的回调方法<confirm必须>
-cancelMethodIdentifier|String|取消按钮回调的标识<confirm必须>
-confirmTitle|String|确认按钮标题
-cancelTitle|String|取消按钮标题<confirm必须>
-title|String|弹窗标题<必须>
-message|String|消息内容<必须>
+| 参数名称                    | 参数类型   | 参数描述                 |
+| ----------------------- | ------ | -------------------- |
+| type                    | String | 'alert'或者'confirm'   |
+| confirmMethodName       | String | 确认按钮的回调方法<必须>        |
+| confirmMethodIdentifier | String | 确认按钮回调的标识<必须>        |
+| cancelMethodName        | String | 取消按钮的回调方法<confirm必须> |
+| cancelMethodIdentifier  | String | 取消按钮回调的标识<confirm必须> |
+| confirmTitle            | String | 确认按钮标题               |
+| cancelTitle             | String | 取消按钮标题<confirm必须>    |
+| title                   | String | 弹窗标题<必须>             |
+| message                 | String | 消息内容<必须>             |
 
 >`confirmMethodName`与`confirmMethodIdentifier`这样的字符用于回调, JS需要先注册方法名称, 供OC点击按钮后回调。
 
 返回值
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-identifier|String|标识
+| 参数名称       | 参数类型   | 参数描述 |
+| ---------- | ------ | ---- |
+| identifier | String | 标识   |
 
 ***
 
@@ -246,15 +244,15 @@ identifier|String|标识
 
 参数
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-text|String|Loading提示文字
+| 参数名称 | 参数类型   | 参数描述        |
+| ---- | ------ | ----------- |
+| text | String | Loading提示文字 |
 
 返回值
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-token|String|token字串
+| 参数名称  | 参数类型   | 参数描述    |
+| ----- | ------ | ------- |
+| token | String | token字串 |
 
 ***
 
@@ -264,12 +262,32 @@ token|String|token字串
 
 参数
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-url|String|目标URL
+| 参数名称 | 参数类型   | 参数描述  |
+| ---- | ------ | ----- |
+| url  | String | 目标URL |
 
 返回值
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-token|String|token字串
+| 参数名称  | 参数类型   | 参数描述    |
+| ----- | ------ | ------- |
+| token | String | token字串 |
+
+
+
+11.网络请求
+
+sendApi
+
+参数
+
+| 参数名称   | 参数类型      | 参数描述                        |
+| ------ | --------- | --------------------------- |
+| path   | String    | 网络请求的Path                   |
+| param  | Object {} | 网络请求的键值对参数                  |
+| method | String    | 网络请求的方式 `GET` OR `POST`     |
+| host   | String    | Busi User Static 不传 默认为Busi |
+
+返回值
+
+**直接调用callBack进行值的返回, 如果callBack不存在或者被释放, 本次网络请求结果无着陆点**
+
