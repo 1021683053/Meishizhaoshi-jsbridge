@@ -26,8 +26,14 @@
         _originURLString = urlString;
         _webView = [[UIWebView alloc] init];
         _bridge = [WebViewJavascriptBridge bridgeForWebView:_webView];
+        self->_loadState = MSWebVCLoadState_Ready;
     }
     return self;
+}
+
+- (void) cancelLoading {
+    // STOP loading.
+    [self.webView stopLoading];
 }
 
 - (void) enableRightItem {
@@ -42,6 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Add Web view.
+    _webView.scalesPageToFit = YES;
     _webView.frame = self.view.bounds;
     [self.view addSubview:_webView];
     // Enable JavaScript Logging.
@@ -152,24 +159,34 @@
 #pragma mark - Delegated
 //------------------------------------------------------------------------------
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    NSLog(@"webViewDidStartLoad");
+- (BOOL) webView: (UIWebView *) webView shouldStartLoadWithRequest:(NSURLRequest *) request
+  navigationType: (UIWebViewNavigationType) navigationType {
+    // Default return `YES`, Means you can fire any WebView Request.
+    return YES;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSLog(@"webViewDidFinishLoad");
+- (void) webViewDidStartLoad: (UIWebView *) webView {
+    self->_loadState = MSWebVCLoadState_Loading;
+}
+
+- (void) webViewDidFinishLoad: (UIWebView *) webView {
+    self->_loadState = MSWebVCLoadState_Finished;
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+}
+
+- (void) webView: (UIWebView *) webView didFailLoadWithError: (NSError *) error {
+    self->_loadState = MSWebVCLoadState_FinishedWithError;
 }
 
 //------------------------------------------------------------------------------
 #pragma mark - Dealloced
 //------------------------------------------------------------------------------
 
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
+- (void) dealloc {
     if ( _webView ) {
         [MSWebViewUtil CleanWebView:_webView];
     }

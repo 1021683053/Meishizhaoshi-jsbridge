@@ -11,9 +11,23 @@
 
 @interface MSWebViewController : UIViewController
 
+/**
+ The MSWebViewController. web container object.
+ */
 @property ( nonatomic, strong, readonly ) UIWebView * webView;
+/**
+ webView load State.
+ */
 @property ( nonatomic, assign, readonly ) MSWebViewControllerLoadState loadState;
 
+/**
+ Initialized method!.
+ */
 - (instancetype) initWithURLString: (NSString *) urlString;
+
+/**
+ Cancel current webView loading. call `stopLoading` method with webView.
+ */
+- (void) cancelLoading;
 
 @end
