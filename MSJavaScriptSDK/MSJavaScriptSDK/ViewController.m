@@ -28,7 +28,7 @@
 }
 
 - (IBAction)openWebView:(UIButton *)sender {
-
+    
     [self.navigationController
      pushViewController:[MSApp appWithURLString:_textField.text] animated:YES];
 }

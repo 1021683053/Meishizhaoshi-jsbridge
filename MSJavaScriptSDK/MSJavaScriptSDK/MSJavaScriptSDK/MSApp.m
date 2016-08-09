@@ -46,6 +46,7 @@
 
 - (void) startWithOptions: (NSDictionary *) options {
     [MSWebViewUtil MakeUpWebViewMemoryLeak];
+    [MSWebViewUtil AppendCustomUserAgent:@" Meishizhaoshi/M_3.6.1"];
 }
 
 + (void) disableLog {
