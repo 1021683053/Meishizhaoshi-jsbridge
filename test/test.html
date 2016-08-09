@@ -5,32 +5,62 @@
         <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <title>jsbrige测试</title>
         <script src="http://apps.bdimg.com/libs/fastclick/1.0.0/fastclick.min.js" charset="utf-8"></script>
+        <!-- <script src="../lib/amazeui-touch/dist/amazeui.touch.css" charset="utf-8"></script> -->
+        <link rel="stylesheet" href="http://www.auicss.com/css/aui.2.0.css" charset="utf-8">
         <script type="text/javascript">
             window.addEventListener('load', function() {
                 FastClick.attach(document.body);
             }, false);
         </script>
-        <script src="../dist/jsbridge.js" charset="utf-8"></script>
+        <script src="../dist/jsbridge.min.js" charset="utf-8"></script>
+        <style media="screen">
+            button{ display: block; width: 100%; text-align: center; padding: 10px 0;}
+            .header {
+                padding: 2.5rem 0.5rem 2rem 0.5rem;
+            }
+            .header p{ font-size: 12px; color: #FFF; line-height: 1em;}
+
+        </style>
     </head>
     <body>
-        <button class="showShareView">showShareView</button>
-        <button class="openCityChooseView">openCityChooseView</button>
+        <header class="aui-bar aui-bar-nav aui-text-left header" id="header">
+            <h1>
+                <a class="aui-btn aui-pull-right" tapmode onclick="openClub()">
+                    <i class="aui-iconfont aui-icon-question"></i>
+                </a>
+                JSBridge 1.0
+                <p></p>
+            </h1>
+        </header>
+        <section class="aui-content-padded">
+            <div class="aui-row-padded">
+                <div class="aui-col-xs-6">
+                    <button class="showShareView">showShareView</button>
+                </div>
+                <div class="aui-col-xs-6">
+                    <button class="openCityChooseView">openCityChooseView</button>
+                </div>
+            </div>
+        </section>
+        
     </body>
 </html>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+
 <script type="text/javascript">
     // var json = JSON.stringify(bridge.client);
     // document.write(json);
-    document.write(JSON.stringify( navigator.userAgent ));
+    $(".header p").text(JSON.stringify( navigator.userAgent ));
+    // document.write(JSON.stringify( navigator.userAgent ));
     $('.showShareView').on("click", function(){
         bridge.trigger('showShareView', {text: "Liweifeng"}, function(response){
-            alert("");
+            alert( JSON.stringify(response) );
         });
 
     });
     $('.openCityChooseView').on("click", function(){
         bridge.trigger('openCityChooseView', {}, function(response){
-            alert("");
+            alert( JSON.stringify( response) );
         });
     });
 
