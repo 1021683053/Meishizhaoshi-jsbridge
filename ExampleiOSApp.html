@@ -25,36 +25,39 @@
         setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
   }
 
+setTimeout(function () {
+
+
   setupWebViewJavascriptBridge(function(bridge) {
 
 // 注册
 
 // 下啦刷新动作 + pass
-bridge.registerHandler('refreshTriggered', function(data, responseCallback) {
-    alert('refreshTriggered');
-})
-
-// alert与confirm的按钮事件回调, 这些方法的名称就是下边传给客户端的confirmMethodName, 返
-// 回的结果就是confirmMethodIdentifier标识
-bridge.registerHandler('alertClick', function(data, responseCallback) {
-    alert(data['identifier']);
-})
-
-bridge.registerHandler('confirmClick', function(data, responseCallback) {
-    alert(data['identifier']);
-})
-
-bridge.registerHandler('confirmCancel', function(data, responseCallback) {
-    alert(data['identifier']);
-})
+// bridge.registerHandler('refreshTriggered', function(data, responseCallback) {
+//     alert('refreshTriggered');
+// })
+//
+// // alert与confirm的按钮事件回调, 这些方法的名称就是下边传给客户端的confirmMethodName, 返
+// // 回的结果就是confirmMethodIdentifier标识
+// bridge.registerHandler('alertClick', function(data, responseCallback) {
+//     alert(data['identifier']);
+// })
+//
+// bridge.registerHandler('confirmClick', function(data, responseCallback) {
+//     alert(data['identifier']);
+// })
+//
+// bridge.registerHandler('confirmCancel', function(data, responseCallback) {
+//     alert(data['identifier']);
+// })
 
 // 调用
-
+alert();
 // 获取城市名称ID + pass
-// bridge.callHandler('getCityNameAndId', {}, function(response) {
-//
-//     alert(response['cityName'] + '\n' + response['cityId']);
-// })
+bridge.callHandler('getCityNameAndId', {}, function(response) {
+    alert("callback");
+    alert(response['cityName'] + '\n' + response['cityId']);
+})
 
 // 打开城市选择界面 + pass
 // bridge.callHandler('openCityChooseView', {}, function(response) {
@@ -132,7 +135,7 @@ bridge.registerHandler('confirmCancel', function(data, responseCallback) {
 // })
 
 })
-
+}, 1000);
 	</script>
 
 </body></html>

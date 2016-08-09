@@ -4,9 +4,34 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <title>jsbrige测试</title>
+        <script src="http://apps.bdimg.com/libs/fastclick/1.0.0/fastclick.min.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            window.addEventListener('load', function() {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
         <script src="../dist/jsbridge.js" charset="utf-8"></script>
     </head>
     <body>
-        
+        <button class="showShareView">showShareView</button>
+        <button class="openCityChooseView">openCityChooseView</button>
     </body>
 </html>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+    // var json = JSON.stringify(bridge.client);
+    // document.write(json);
+    document.write(JSON.stringify( navigator.userAgent ));
+    $('.showShareView').on("click", function(){
+        bridge.trigger('showShareView', {text: "Liweifeng"}, function(response){
+            alert("");
+        });
+
+    });
+    $('.openCityChooseView').on("click", function(){
+        bridge.trigger('openCityChooseView', {}, function(response){
+            alert("");
+        });
+    });
+
+</script>
