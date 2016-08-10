@@ -6,7 +6,7 @@
         <title>jsbrige测试</title>
         <script src="http://apps.bdimg.com/libs/fastclick/1.0.0/fastclick.min.js" charset="utf-8"></script>
         <!-- <script src="../lib/amazeui-touch/dist/amazeui.touch.css" charset="utf-8"></script> -->
-        <link rel="stylesheet" href="http://www.auicss.com/css/aui.2.0.css" charset="utf-8">
+        <link rel="stylesheet" href="../lib/aui/css/aui.2.0.css" charset="utf-8">
         <script type="text/javascript">
             window.addEventListener('load', function() {
                 FastClick.attach(document.body);
@@ -40,9 +40,29 @@
                 <div class="aui-col-xs-6">
                     <button class="openCityChooseView">openCityChooseView</button>
                 </div>
+                <div class="aui-col-xs-6">
+                    <button class="getCityNameAndId">getCityNameAndId</button>
+                </div>
+                <div class="aui-col-xs-6">
+                    <button class="refreshWebView">refreshWebView</button>
+                </div>
+                <div class="aui-col-xs-6">
+                    <button class="getUserToken">getUserToken</button>
+                </div>
+
+                <div class="aui-col-xs-6">
+                    <button class="showLoading">showLoading</button>
+                </div>
+
+                <div class="aui-col-xs-6">
+                    <button class="openURL">TODO: openURL:baidu</button>
+                </div>
+                <div class="aui-col-xs-6">
+                    <button class="showAlert">showAlert</button>
+                </div>
             </div>
         </section>
-        
+
     </body>
 </html>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
@@ -63,5 +83,70 @@
             alert( JSON.stringify( response) );
         });
     });
+
+    $('.getCityNameAndId').on("click", function(){
+        bridge.trigger('getCityNameAndId', {}, function(response){
+            alert( JSON.stringify( response) );
+        });
+    });
+
+    $('.refreshWebView').on("click", function(){
+        bridge.trigger('refreshWebView', {}, function(response){
+            alert( JSON.stringify( response) );
+        });
+    });
+    $('.getUserToken').on("click", function(){
+        bridge.trigger('getUserToken', {}, function(response){
+            alert( JSON.stringify( response) );
+        });
+    });
+
+    $('.showLoading').on("click", function(){
+        bridge.trigger('showLoading');
+        setTimeout(function () {
+            bridge.trigger('hideLoading', {}, function(){});
+        }, 3000);
+    });
+
+    $('.openURL').on("click", function(){
+        // alert("TODO...");
+        // return false;
+        bridge.trigger('openURL', {url:"http://baidu.com"}, function( response ){
+            alert( JSON.stringify( response) );
+        });
+    });
+
+    $('.showAlert').on("click", function(){
+        var alert_j = {
+          type:'alert',
+          confirmTitle:'Yep!',
+          confirmMethodName:'alertClick',
+          confirmMethodIdentifier:'alert1',
+          title:'i\'m alert',
+          message:'Hello, this is Demo.'
+        }
+        var param = {
+            type: 'alert',
+            confirmMethodName: "confirmMethodName",
+            confirmMethodIdentifier: "dea",
+            confirmTitle: "确定",
+            cancelMethodName: function(){
+                alert(false);
+            },
+            cancelTitle: "取消",
+            title: "Liweifeng:",
+            message: "基于 flexbox，6 列流式"
+        }
+        bridge.trigger('showAlert', alert_j, function( response ){
+            alert( JSON.stringify( response) );
+        });
+
+    });
+
+
+
+
+
+
 
 </script>

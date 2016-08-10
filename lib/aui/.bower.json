@@ -1,0 +1,14 @@
+{
+  "name": "aui",
+  "homepage": "https://github.com/liulangnan/aui",
+  "_release": "81a788dc99",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "81a788dc99d6afbf6670d5a7f2b0c9efcc720bfc"
+  },
+  "_source": "https://github.com/liulangnan/aui.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/liulangnan/aui.git",
+  "_direct": true
+}
