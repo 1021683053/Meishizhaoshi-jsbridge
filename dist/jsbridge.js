@@ -31,11 +31,18 @@
 
     var handler = setNativeBridge;
 
-    bridge.native = null;
+    bridge.native = window.WebViewJavascriptBridge || null;
 
-    bridge.onload = function(){
+    bridge.init = function(){
+        console.log(arguments);
+        var cb = ([].slice.call(arguments))[0];
+        if( bridge.native ){
+            if( cb ){cb()};
+            return;
+        }
         handler(function(native){
             bridge.native = native;
+            if( cb ){cb()};
         });
     };
 
@@ -49,8 +56,6 @@
         bridge.native.callHandler.apply(handler, args);
     };
 
-    bridge.onload();
-
     //柯理化
     function currying(fn) {
         var args = [].slice.call(arguments, 1);
@@ -60,10 +65,25 @@
         };
     };
 
+    //NativeBridge.js
+    function setNativeBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    };
+
     //暴露接口
     bridge.client = client;
     bridge.isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1;
     bridge.isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+    //初始化
+    bridge.init();
 
     // RequireJS && SeaJS
     if (typeof define === 'function') {

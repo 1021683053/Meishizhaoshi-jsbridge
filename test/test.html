@@ -7,7 +7,10 @@
         <script src="http://apps.bdimg.com/libs/fastclick/1.0.0/fastclick.min.js" charset="utf-8"></script>
         <!-- <script src="../lib/amazeui-touch/dist/amazeui.touch.css" charset="utf-8"></script> -->
         <link rel="stylesheet" href="../lib/aui/css/aui.2.0.css" charset="utf-8">
+        <link rel="stylesheet" href="../lib/highlight/styles/default.css" charset="utf-8">
+        <script src="../lib/highlight/highlight.pack.js" charset="utf-8"></script>
         <script type="text/javascript">
+            hljs.initHighlightingOnLoad();
             window.addEventListener('load', function() {
                 FastClick.attach(document.body);
             }, false);
@@ -19,7 +22,12 @@
                 padding: 2.5rem 0.5rem 2rem 0.5rem;
             }
             .header p{ font-size: 12px; color: #FFF; line-height: 1em;}
-
+            .clearfix{}
+            .clearfix:after{
+                content: '';
+                display: block;
+                clear: both;
+            }
         </style>
     </head>
     <body>
@@ -33,7 +41,7 @@
             </h1>
         </header>
         <section class="aui-content-padded">
-            <div class="aui-row-padded">
+            <div class="aui-row-padded clearfix">
                 <div class="aui-col-xs-6">
                     <button class="showShareView">showShareView</button>
                 </div>
@@ -60,93 +68,148 @@
                 <div class="aui-col-xs-6">
                     <button class="showAlert">showAlert</button>
                 </div>
+                <div class="aui-col-xs-6">
+                    <button class="sendApi">sendApi</button>
+                </div>
+                <div class="aui-col-xs-6">
+                    <button class="addPullRefreshWebView">addPullRefreshWebView</button>
+                </div>
+                <div class="aui-col-xs-6">
+                    <button class="stopPullRefreshWebView">stopPullRefreshWebView</button>
+                </div>
+                <div class="aui-col-xs-6">
+                    <button class="openSysURL">openSysURL</button>
+                </div>
             </div>
+        </section>
+        
+        <section class="aui-content-padded">
+            <pre><code class="json" id="json"></code></pre>
         </section>
 
     </body>
 </html>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
-
 <script type="text/javascript">
-    $(".header p").text(JSON.stringify( navigator.userAgent ));
 
-    $('.showShareView').on("click", function(){
-        bridge.emit('showShareView', {text: "Liweifeng"}, function(response){
-            alert( JSON.stringify(response) );
+    bridge.init(function(){
+        $(".header p").text(JSON.stringify( navigator.userAgent ));
+
+        $('.showShareView').on("click", function(){
+            bridge.emit('showShareView', {text: "Liweifeng"}, function(response){
+                alert( JSON.stringify(response) );
+            });
+        });
+        $('.openCityChooseView').on("click", function(){
+            bridge.emit('openCityChooseView', {}, function(response){
+                alert( JSON.stringify( response) );
+            });
         });
 
-    });
-    $('.openCityChooseView').on("click", function(){
-        bridge.emit('openCityChooseView', {}, function(response){
+        $('.getCityNameAndId').on("click", function(){
+            bridge.emit('getCityNameAndId', {}, function(response){
+                alert( JSON.stringify( response) );
+            });
+        });
+
+        $('.refreshWebView').on("click", function(){
+            bridge.emit('refreshWebView', {}, function(response){
+                alert( JSON.stringify( response) );
+            });
+        });
+        $('.getUserToken').on("click", function(){
+            bridge.emit('getUserToken', {}, function(response){
+                alert( JSON.stringify( response) );
+            });
+        });
+
+        $('.showLoading').on("click", function(){
+            bridge.emit('showLoading');
+            setTimeout(function () {
+                bridge.emit('hideLoading', {}, function(){});
+            }, 3000);
+        });
+
+        $('.openURL').on("click", function(){
+            bridge.emit('openURL', {url:"http://baidu.com"}, function( response ){
+                alert( JSON.stringify( response) );
+            });
+        });
+
+        $('.showAlert').on("click", function(){
+            var alert_j = {
+              type:'alert',
+              confirmTitle:'Yep!',
+              confirmMethodName:'alertClick',
+              confirmMethodIdentifier:'alert1',
+              title:'i\'m alert',
+              message:'Hello, this is Demo.'
+            }
+            var param = {
+                type: 'alert',
+                confirmMethodName: "confirmMethodName",
+                confirmMethodIdentifier: "dea",
+                confirmTitle: "确定",
+                cancelMethodName: function(){
+                    alert(false);
+                },
+                cancelTitle: "取消",
+                title: "Liweifeng:",
+                message: "基于 flexbox，6 列流式"
+            }
+            bridge.emit('showAlert', alert_j, function( response ){
+                alert( JSON.stringify( response) );
+            });
+        });
+        $('.sendApi').on("click", function(){
+            bridge.emit('showLoading');
+
+            var param = {};
+            param.path = '/call.json';
+            param.param = {};
+            param.method = "GET";
+            param.host = "Busi";
+            bridge.emit('sendApi', param, function( response ){
+                bridge.emit('hideLoading', {}, function(){});
+                $("#json").html(JSON.stringify( response));
+                // alert( JSON.stringify( response) );
+            });
+
+        });
+
+        $('.addPullRefreshWebView').on("click", function(){
+            bridge.emit('addPullRefreshWebView', {}, function( response ){
+                alert( JSON.stringify( response) );
+            });
+        });
+
+        $('.stopPullRefreshWebView').on("click", function(){
+            bridge.emit('stopPullRefreshWebView', {}, function( response ){
+                alert( JSON.stringify( response) );
+            });
+        });
+
+        $('.openSysURL').on("click", function(){
+            bridge.emit('openSysURL', {URL: 'http://baidu.com'}, function( response ){
+                alert( JSON.stringify( response) );
+            });
+        });
+
+        bridge.on('alertClick', function(response){
             alert( JSON.stringify( response) );
         });
-    });
 
-    $('.getCityNameAndId').on("click", function(){
-        bridge.emit('getCityNameAndId', {}, function(response){
-            alert( JSON.stringify( response) );
+        bridge.on('refreshTriggered', function(response){
+            bridge.emit('stopPullRefreshWebView', {}, function(){});
+            // alert( JSON.stringify( response) );
         });
+
+
     });
 
-    $('.refreshWebView').on("click", function(){
-        bridge.emit('refreshWebView', {}, function(response){
-            alert( JSON.stringify( response) );
-        });
-    });
-    $('.getUserToken').on("click", function(){
-        bridge.emit('getUserToken', {}, function(response){
-            alert( JSON.stringify( response) );
-        });
-    });
 
-    $('.showLoading').on("click", function(){
-        bridge.emit('showLoading');
-        setTimeout(function () {
-            bridge.emit('hideLoading', {}, function(){});
-        }, 3000);
-    });
 
-    $('.openURL').on("click", function(){
-        bridge.emit('openURL', {url:"http://baidu.com"}, function( response ){
-            alert( JSON.stringify( response) );
-        });
-    });
 
-    $('.showAlert').on("click", function(){
-        var alert_j = {
-          type:'alert',
-          confirmTitle:'Yep!',
-          confirmMethodName:'alertClick',
-          confirmMethodIdentifier:'alert1',
-          title:'i\'m alert',
-          message:'Hello, this is Demo.'
-        }
-        var param = {
-            type: 'alert',
-            confirmMethodName: "confirmMethodName",
-            confirmMethodIdentifier: "dea",
-            confirmTitle: "确定",
-            cancelMethodName: function(){
-                alert(false);
-            },
-            cancelTitle: "取消",
-            title: "Liweifeng:",
-            message: "基于 flexbox，6 列流式"
-        }
-        bridge.emit('showAlert', alert_j, function( response ){
-            alert( JSON.stringify( response) );
-        });
-    });
 
-    bridge.on('alertClick', function(response){
-        alert( JSON.stringify( response) );
-    });
-
-    bridge.on('alertClick', function(response){
-        alert( JSON.stringify( response) );
-    });
-    bridge.on('alertClick', function(response){
-        alert( JSON.stringify( response) );
-    });
 
 </script>

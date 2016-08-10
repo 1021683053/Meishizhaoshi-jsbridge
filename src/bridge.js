@@ -3,11 +3,18 @@
 
     var handler = setNativeBridge;
 
-    bridge.native = null;
+    bridge.native = window.WebViewJavascriptBridge || null;
 
-    bridge.onload = function(){
+    bridge.init = function(){
+        console.log(arguments);
+        var cb = ([].slice.call(arguments))[0];
+        if( bridge.native ){
+            if( cb ){cb()};
+            return;
+        }
         handler(function(native){
             bridge.native = native;
+            if( cb ){cb()};
         });
     };
 
@@ -20,5 +27,3 @@
         var args = [].slice.call(arguments);
         bridge.native.callHandler.apply(handler, args);
     };
-
-    bridge.onload();
