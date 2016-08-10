@@ -7,6 +7,7 @@ var sources = [
     'src/client.js',
     'src/bridge.js',
     'src/util.js',
+    'src/sets.js',
     'src/exports.js',
     'src/outro.js'
 ];

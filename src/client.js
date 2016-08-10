@@ -1,4 +1,5 @@
     //返回浏览器信息
+    var UA = navigator.userAgent;
     var Client = function( APP, UA){
         if( this == window ){
             return new Client(APP, UA);
@@ -16,3 +17,4 @@
             return new RegExp(regstr);
         };
     };
+    var client = new Client('Meishizhaoshi', UA);

@@ -12,7 +12,7 @@
                 FastClick.attach(document.body);
             }, false);
         </script>
-        <script src="../dist/jsbridge.min.js" charset="utf-8"></script>
+        <script src="../dist/jsbridge.js" charset="utf-8"></script>
         <style media="screen">
             button{ display: block; width: 100%; text-align: center; padding: 10px 0;}
             .header {
@@ -68,50 +68,46 @@
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-    // var json = JSON.stringify(bridge.client);
-    // document.write(json);
     $(".header p").text(JSON.stringify( navigator.userAgent ));
-    // document.write(JSON.stringify( navigator.userAgent ));
+
     $('.showShareView').on("click", function(){
-        bridge.trigger('showShareView', {text: "Liweifeng"}, function(response){
+        bridge.emit('showShareView', {text: "Liweifeng"}, function(response){
             alert( JSON.stringify(response) );
         });
 
     });
     $('.openCityChooseView').on("click", function(){
-        bridge.trigger('openCityChooseView', {}, function(response){
+        bridge.emit('openCityChooseView', {}, function(response){
             alert( JSON.stringify( response) );
         });
     });
 
     $('.getCityNameAndId').on("click", function(){
-        bridge.trigger('getCityNameAndId', {}, function(response){
+        bridge.emit('getCityNameAndId', {}, function(response){
             alert( JSON.stringify( response) );
         });
     });
 
     $('.refreshWebView').on("click", function(){
-        bridge.trigger('refreshWebView', {}, function(response){
+        bridge.emit('refreshWebView', {}, function(response){
             alert( JSON.stringify( response) );
         });
     });
     $('.getUserToken').on("click", function(){
-        bridge.trigger('getUserToken', {}, function(response){
+        bridge.emit('getUserToken', {}, function(response){
             alert( JSON.stringify( response) );
         });
     });
 
     $('.showLoading').on("click", function(){
-        bridge.trigger('showLoading');
+        bridge.emit('showLoading');
         setTimeout(function () {
-            bridge.trigger('hideLoading', {}, function(){});
+            bridge.emit('hideLoading', {}, function(){});
         }, 3000);
     });
 
     $('.openURL').on("click", function(){
-        // alert("TODO...");
-        // return false;
-        bridge.trigger('openURL', {url:"http://baidu.com"}, function( response ){
+        bridge.emit('openURL', {url:"http://baidu.com"}, function( response ){
             alert( JSON.stringify( response) );
         });
     });
@@ -137,16 +133,20 @@
             title: "Liweifeng:",
             message: "基于 flexbox，6 列流式"
         }
-        bridge.trigger('showAlert', alert_j, function( response ){
+        bridge.emit('showAlert', alert_j, function( response ){
             alert( JSON.stringify( response) );
         });
-
     });
 
+    bridge.on('alertClick', function(response){
+        alert( JSON.stringify( response) );
+    });
 
-
-
-
-
+    bridge.on('alertClick', function(response){
+        alert( JSON.stringify( response) );
+    });
+    bridge.on('alertClick', function(response){
+        alert( JSON.stringify( response) );
+    });
 
 </script>

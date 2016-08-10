@@ -6,6 +6,7 @@
 !(function () {
 
     //返回浏览器信息
+    var UA = navigator.userAgent;
     var Client = function( APP, UA){
         if( this == window ){
             return new Client(APP, UA);
@@ -23,45 +24,32 @@
             return new RegExp(regstr);
         };
     };
-
+    var client = new Client('Meishizhaoshi', UA);
 
     //JS Bridge 桥梁构建
-    var UA = navigator.userAgent,
-        client = new Client('Meishizhaoshi', UA);
+    var bridge = {};
 
+    var handler = setNativeBridge;
 
-    var Bridge = function(){
-        this.inapp = client.version || false;
-        this.handler = null;
-        if( this.inapp ){
-            this.handler = function(callback) {
-                if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
-                if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
-                window.WVJBCallbacks = [callback];
-                var WVJBIframe = document.createElement('iframe');
-                WVJBIframe.style.display = 'none';
-                WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
-                document.documentElement.appendChild(WVJBIframe);
-                setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
-            };
-        }else{
-            
-        }
-    };
+    bridge.native = null;
 
-    Bridge.prototype.on = function(){
-        var args = [].slice.call(arguments);
-        this.handler(function(bridge){
-            bridge.registerHandler.apply(this.handler, args);
+    bridge.onload = function(){
+        handler(function(native){
+            bridge.native = native;
         });
     };
 
-    Bridge.prototype.trigger = function(){
+    bridge.on = function(){
         var args = [].slice.call(arguments);
-        this.handler(function(bridge){
-            bridge.callHandler.apply(this.handler, args);
-        });
+        bridge.native.registerHandler.apply(handler, args);;
     };
+
+    bridge.emit = function(){
+        var args = [].slice.call(arguments);
+        bridge.native.callHandler.apply(handler, args);
+    };
+
+    bridge.onload();
 
     //柯理化
     function currying(fn) {
@@ -73,7 +61,6 @@
     };
 
     //暴露接口
-    var bridge = new Bridge();
     bridge.client = client;
     bridge.isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1;
     bridge.isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
