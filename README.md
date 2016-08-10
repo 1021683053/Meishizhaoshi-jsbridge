@@ -302,3 +302,15 @@ sendApi
 返回值
 
 **直接调用callBack进行值的返回, 如果callBack不存在或者被释放, 本次网络请求结果无着陆点**
+
+
+
+12.打开系统级别URL(safari, message, tel ...)
+
+openSysURL
+
+| 参数名称 | 参数类型   | 参数描述  |
+| ---- | ------ | ----- |
+| URL  | String | 打开的地址 |
+
+iOS目前支持： tel:// http:// ….系统支持的这里都行, 包括跳转到AppStore等。
