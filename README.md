@@ -161,9 +161,11 @@ setupWebViewJavascriptBridge(function(bridge){
 
 参数: param
 
-| 参数名称 | 参数类型   | 参数描述    |
-| ---- | ------ | ------- |
-| text | string | 分享的文字内容 |
+| 参数名称  | 参数类型   | 参数描述    |
+| ----- | ------ | ------- |
+| text  | string | 分享的文字内容 |
+| url   | String | 分享的链接网址 |
+| title | String | 分享的标题   |
 
 返回值: response
 
