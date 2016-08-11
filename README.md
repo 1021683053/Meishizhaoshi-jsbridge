@@ -357,3 +357,16 @@ identifier: 先去写死的Map中查询对应关系, 如果 map[identifier] 不�
 | URL  | String<必须> | 打开的地址 |
 
 iOS目前支持： tel:// http:// ….系统支持的这里都行, 包括跳转到AppStore等。
+
+
+
+#### 13.控制导航右上角按钮 (iOS, Android可选)
+
+接口: `hideRightBarButton`
+
+参数: param
+
+| 参数名称   | 参数类型                     | 参数描述 |
+| ------ | ------------------------ | ---- |
+| hidden | <String> 'true', 'false' | 是否隐藏 |
+
