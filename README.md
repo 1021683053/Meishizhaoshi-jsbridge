@@ -294,7 +294,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-#### 10.打开窗口
+#### 10.打开窗口(WebView)
 
 接口：`openURL`
 
@@ -305,6 +305,25 @@ setupWebViewJavascriptBridge(function(bridge){
 | url  | String | 目标URL |
 
 返回值：response {}
+
+
+
+#### 10.1打开窗口(Native)
+
+接口: `openWindow`
+
+参数: param
+
+| 参数名称       | 参数类型   | 参数描述             |
+| ---------- | ------ | ---------------- |
+| identifier | String | 约定好的Native界面唯一标识 |
+| param      | Object | 约定好的Native界面所需参数 |
+
+
+
+#### 10.2关闭窗口
+
+接口: `closeWindow`
 
 
 
