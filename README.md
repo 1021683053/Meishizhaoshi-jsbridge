@@ -116,7 +116,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 1. 获取城市地点和城市ID
+#### 1. 获取城市地点和城市ID
 
 接口：`getCityNameAndId`
 
@@ -129,9 +129,18 @@ setupWebViewJavascriptBridge(function(bridge){
 | cityName | String | 城市名称 |
 | cityId   | String | 城市ID |
 
+返回示例：
+
+``` javascript
+    {
+        cityId: '2910',
+        cityName: '广州'
+    }
+```
 
 
-### 2. 打开城市选择界面
+
+#### 2. 打开城市选择界面
 
 接口：`openCityChooseView`
 
@@ -146,7 +155,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 3. 打开分享界面
+#### 3. 打开分享界面
 
 接口：`showShareView`
 
@@ -163,9 +172,18 @@ setupWebViewJavascriptBridge(function(bridge){
 | statu | bool   | 是否分享成功  |
 | data  | Object | 友盟返回的数据 |
 
+返回示例：
+``` javascript
+    {
+        statu: '1',
+        data: {
+            qq:""
+        }
+    }
+```
 
 
-### 4. 主动刷新当前webView
+#### 4. 主动刷新当前webView
 
 接口：`refreshWebView`
 
@@ -175,7 +193,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 5. 主动触发下拉刷新
+#### 5. 主动触发下拉刷新
 
 接口：`pullRefreshWebView`
 
@@ -187,7 +205,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 6. 停止下拉刷新
+#### 6. 停止下拉刷新
 
 接口：`stopPullRefreshWebView`
 
@@ -197,7 +215,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 7. 添加下拉刷新
+#### 7. 添加下拉刷新
 
 接口：`addPullRefreshWebView`
 
@@ -208,7 +226,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 8. 获取用户token
+#### 8. 获取用户token
 
 接口：`getUserToken`
 
@@ -219,12 +237,16 @@ setupWebViewJavascriptBridge(function(bridge){
 | 参数名称  | 参数类型   | 参数描述    |
 | ----- | ------ | ------- |
 | token | String | token字串 |
+返回示例：
+``` javascript
+    {
+        token: "u5***************"
+    }
+```
 
-***
 
 
-
-### 9. 显示Alert, confirm
+#### 9. 显示Alert, confirm
 
 接口：`showAlert`, `showConfirm`
 
@@ -252,7 +274,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 10. 显示Loading, 隐藏Loading
+#### 10. 显示Loading, 隐藏Loading
 
 接口：`showLoading`, `hideLoading`
 
@@ -270,7 +292,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 10.打开窗口
+#### 10.打开窗口
 
 接口：`openURL`
 
@@ -280,15 +302,11 @@ setupWebViewJavascriptBridge(function(bridge){
 | ---- | ------ | ----- |
 | url  | String | 目标URL |
 
-返回值：response
-
-| 参数名称  | 参数类型   | 参数描述    |
-| ----- | ------ | ------- |
-| token | String | token字串 |
+返回值：response {}
 
 
 
-### 11. 网络请求
+#### 11. 网络请求
 
 接口：`sendApi`
 
@@ -307,7 +325,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-### 12. 打开系统级别URL(safari, message, tel ...)
+#### 12. 打开系统级别URL(safari, message, tel ...)
 
 接口：`openSysURL`
 
