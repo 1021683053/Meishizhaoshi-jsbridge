@@ -118,69 +118,69 @@ setupWebViewJavascriptBridge(function(bridge){
 
 #### 1. 获取城市地点和城市ID
 
-    接口：`getCityNameAndId`
+接口：`getCityNameAndId`
 
-    参数：param {}
+参数：param {}
 
-    返回值：
+返回值：
 
-    | 参数名称     | 参数类型   | 参数描述 |
-    | -------- | ------ | ---- |
-    | cityName | String | 城市名称 |
-    | cityId   | String | 城市ID |
+| 参数名称     | 参数类型   | 参数描述 |
+| -------- | ------ | ---- |
+| cityName | String | 城市名称 |
+| cityId   | String | 城市ID |
 
-    返回示例：
+返回示例：
 
-    ``` javascript
-        {
-            cityId: '2910',
-            cityName: '广州'
-        }
-    ```
+``` javascript
+    {
+        cityId: '2910',
+        cityName: '广州'
+    }
+```
 
 
 
 #### 2. 打开城市选择界面
 
-    接口：`openCityChooseView`
+接口：`openCityChooseView`
 
-    参数：param {}
+参数：param {}
 
-    返回值：
+返回值：
 
-    | 参数名称     | 参数类型   | 参数描述 |
-    | -------- | ------ | ---- |
-    | cityName | String | 城市名称 |
-    | cityId   | String | 城市ID |
+| 参数名称     | 参数类型   | 参数描述 |
+| -------- | ------ | ---- |
+| cityName | String | 城市名称 |
+| cityId   | String | 城市ID |
 
 
 
 #### 3. 打开分享界面
 
-    接口：`showShareView`
+接口：`showShareView`
 
-    参数: param
+参数: param
 
-    | 参数名称 | 参数类型   | 参数描述    |
-    | ---- | ------ | ------- |
-    | text | string | 分享的文字内容 |
+| 参数名称 | 参数类型   | 参数描述    |
+| ---- | ------ | ------- |
+| text | string | 分享的文字内容 |
 
-    返回值: response
+返回值: response
 
-    | 参数名称  | 参数类型   | 参数描述    |
-    | ----- | ------ | ------- |
-    | statu | bool   | 是否分享成功  |
-    | data  | Object | 友盟返回的数据 |
+| 参数名称  | 参数类型   | 参数描述    |
+| ----- | ------ | ------- |
+| statu | bool   | 是否分享成功  |
+| data  | Object | 友盟返回的数据 |
 
-    返回示例：
-    ``` javascript
-        {
-            statu: '1',
-            data: {
-                qq:""
-            }
+返回示例：
+``` javascript
+    {
+        statu: '1',
+        data: {
+            qq:""
         }
-    ```
+    }
+```
 
 
 #### 4. 主动刷新当前webView
