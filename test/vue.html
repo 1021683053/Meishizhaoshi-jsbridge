@@ -16,7 +16,7 @@
     </head>
     <body>
         <p style="margin:60px;">
-            
+
         </p>
         <div id="demo">
             <h1>Latest Vue.js Commits</h1>
@@ -31,7 +31,7 @@
             <p>vuejs/vue@{{currentBranch}}</p>
             <ul>
                 <li v-for="record in commits">
-                    <a :href="record.html_url" target="_blank" class="commit">{{record.sha.slice(0, 7)}}</a>
+                    <a :M-href="record.html_url" @click="link" target="_blank" class="commit">{{record.sha.slice(0, 7)}}</a>
                     - <span class="message">{{record.commit.message | truncate}}</span><br>
                     by <span class="author">{{record.commit.author.name}}</span>
                     at <span class="date">{{record.commit.author.date | formatDate}}</span>
@@ -39,7 +39,7 @@
             </ul>
         </div>
         <script type="text/javascript">
-        var apiURL = 'https://api.github.com/repos/vuejs/vue/commits?per_page=3&sha='
+        var apiURL = 'https://api.github.com/repos/vuejs/vue/commits?per_page=10&sha='
 
 
         function mockData () {
@@ -80,18 +80,22 @@
             },
 
             methods: {
-            fetchData: function () {
-              bridge.emit('showLoading');
-              var xhr = new XMLHttpRequest()
-              var self = this
-              xhr.open('GET', apiURL + self.currentBranch)
-              xhr.onload = function () {
-                self.commits = JSON.parse(xhr.responseText)
-                console.log(self.commits[0].html_url);
-                bridge.emit('hideLoading', {}, function(){});
-              }
-              xhr.send()
-            }
+                fetchData: function () {
+                      bridge.emit('showLoading');
+                      var xhr = new XMLHttpRequest()
+                      var self = this
+                      xhr.open('GET', apiURL + self.currentBranch)
+                      xhr.onload = function () {
+                        self.commits = JSON.parse(xhr.responseText)
+                        console.log(self.commits[0].html_url);
+                        bridge.emit('hideLoading', {}, function(){});
+                      }
+                      xhr.send()
+                  },
+                  link: function(event){
+                      var link = event.currentTarget.getAttribute('m-href');
+                      bridge.emit("openURL", {url: link});
+                  }
             }
             })
         });
