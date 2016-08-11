@@ -79,142 +79,130 @@ _*注：向后追加版本号*_
 
 ***
 
-1.获取城市地点和城市ID
 
-*getCityNameAndId*
 
-参数
+## Native API
+原生注入后直接调用方式
+```javascript
+//此回调属于异步
+function setupWebViewJavascriptBridge(callback) {
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
+      if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+      if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+      window.WVJBCallbacks = [callback];
+      var WVJBIframe = document.createElement('iframe');
+      WVJBIframe.style.display = 'none';
+      WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+      document.documentElement.appendChild(WVJBIframe);
+      setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+}
 
-返回值
+//注册bridge
+setupWebViewJavascriptBridge(function(bridge){
+
+    //注册事件
+    bridge.registerHandler('refreshTriggered', {}, function(response){
+        console.log(response);
+    });
+
+    //调用接口
+    bridge.callHandler('getCityNameAndId', {}, function(response){
+        console.log(response);
+    });
+
+});
+
+```
+
+#### 1. 获取城市地点和城市ID
+
+
+接口：`getCityNameAndId`
+
+参数：param {}
+
+返回值：
 
 | 参数名称     | 参数类型   | 参数描述 |
 | -------- | ------ | ---- |
 | cityName | String | 城市名称 |
 | cityId   | String | 城市ID |
 
-***
+#### 2. 打开城市选择界面
 
-2.打开城市选择界面
+接口：`openCityChooseView`
 
-*openCityChooseView*
+参数：param {}
 
-参数
-
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
-
-返回值
+返回值：
 
 | 参数名称     | 参数类型   | 参数描述 |
 | -------- | ------ | ---- |
 | cityName | String | 城市名称 |
 | cityId   | String | 城市ID |
 
-***
+#### 3. 打开分享界面
 
-3.打开分享界面
+接口：`showShareView`
 
-*showShareView*
-
-参数
+参数: param
 
 | 参数名称 | 参数类型   | 参数描述    |
 | ---- | ------ | ------- |
 | text | string | 分享的文字内容 |
 
-返回值
+返回值: response
 
 | 参数名称  | 参数类型   | 参数描述    |
 | ----- | ------ | ------- |
 | statu | bool   | 是否分享成功  |
 | data  | Object | 友盟返回的数据 |
 
-***
+#### 4. 主动刷新当前webView
 
-4.主动刷新当前webView
+接口：`refreshWebView`
 
-*refreshWebView*
+参数：param {}
 
-参数
+返回值：response null
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
+#### 5. 主动触发下拉刷新
 
-返回值
+接口：`pullRefreshWebView`
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
+参数：param {}
 
-***
-
-5.主动触发下拉刷新
-
-*pullRefreshWebView*
-
-参数
-
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
-
-返回值
-
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
+返回值：response null
 
 >调用下拉刷新后, 会在触发动作之后调用 `refreshTriggered` 方法, JS需要提前注册该方法, 以备接受下拉刷新动作
 
-***
 
-6.停止下拉刷新
+#### 6. 停止下拉刷新
 
-*stopPullRefreshWebView*
+接口：`stopPullRefreshWebView`
 
-参数
+参数：param {}
 
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
-
-返回值
-
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
+返回值：response null
 
 
+#### 7. 添加下拉刷新
 
-添加下拉刷新
+接口：`addPullRefreshWebView`
 
-*addPullRefreshWebView*
+参数：param {}
 
-参数
+返回值：response null
+>此接口是开启Webview功能，可以下拉刷新，刷新事件触发于`refreshTriggered`中，也就是需要先注册此事件方法！
 
-| 参数名称 | 参数类型 | 参数描述 |
-| ---- | ---- | ---- |
-|      |      |      |
 
-***
+#### 8. 获取用户token
 
-7.获取用户token
+接口：`getUserToken`
 
-*getUserToken*
+参数：param {}
 
-参数
-
-参数名称     |  参数类型  | 参数描述
-------------|----------|------------
-||
-
-返回值
+返回值：response
 
 | 参数名称  | 参数类型   | 参数描述    |
 | ----- | ------ | ------- |
@@ -222,11 +210,11 @@ _*注：向后追加版本号*_
 
 ***
 
-8.显示Alert, confirm
+#### 9. 显示Alert, confirm
 
-*showAlert*, *showConfirm*
+接口：`showAlert`, `showConfirm`
 
-参数
+参数：param
 
 | 参数名称                    | 参数类型   | 参数描述                 |
 | ----------------------- | ------ | -------------------- |
@@ -242,55 +230,52 @@ _*注：向后追加版本号*_
 
 >`confirmMethodName`与`confirmMethodIdentifier`这样的字符用于回调, JS需要先注册方法名称, 供OC点击按钮后回调。
 
-返回值
+返回值：response
 
 | 参数名称       | 参数类型   | 参数描述 |
 | ---------- | ------ | ---- |
 | identifier | String | 标识   |
 
-***
 
-9.显示Loading, 隐藏Loading
+#### 10. 显示Loading, 隐藏Loading
 
-*showLoading*, *hideLoading*
+接口：`showLoading`, `hideLoading`
 
-参数
+参数：param
 
 | 参数名称 | 参数类型   | 参数描述        |
 | ---- | ------ | ----------- |
 | text | String | Loading提示文字 |
 
-返回值
+返回值：response
 
 | 参数名称  | 参数类型   | 参数描述    |
 | ----- | ------ | ------- |
 | token | String | token字串 |
 
-***
 
-10.打开窗口
+#### 10.打开窗口
 
-*openURL*
+接口：`openURL`
 
-参数
+参数：param
 
 | 参数名称 | 参数类型   | 参数描述  |
 | ---- | ------ | ----- |
 | url  | String | 目标URL |
 
-返回值
+返回值：response
 
 | 参数名称  | 参数类型   | 参数描述    |
 | ----- | ------ | ------- |
 | token | String | token字串 |
 
 
+#### 11. 网络请求
 
-11.网络请求
+接口：`sendApi`
 
-sendApi
-
-参数
+参数：param
 
 | 参数名称   | 参数类型      | 参数描述                        |
 | ------ | --------- | --------------------------- |
@@ -299,15 +284,17 @@ sendApi
 | method | String    | 网络请求的方式 `GET` OR `POST`     |
 | host   | String    | Busi User Static 不传 默认为Busi |
 
-返回值
+返回值：response
 
 **直接调用callBack进行值的返回, 如果callBack不存在或者被释放, 本次网络请求结果无着陆点**
 
 
 
-12.打开系统级别URL(safari, message, tel ...)
+#### 12. 打开系统级别URL(safari, message, tel ...)
 
-openSysURL
+接口：`openSysURL`
+
+参数：param
 
 | 参数名称 | 参数类型   | 参数描述  |
 | ---- | ------ | ----- |
