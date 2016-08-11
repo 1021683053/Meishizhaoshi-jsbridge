@@ -319,7 +319,7 @@ setupWebViewJavascriptBridge(function(bridge){
 | identifier | String | 约定好的Native界面唯一标识 |
 | param      | Object | 约定好的Native界面所需参数 |
 
-
+identifier: 先去写死的Map中查询对应关系, 如果 map[identifier] 不存在, 如果 identifier为Activity名称就直接使用反射进行跳转。
 
 #### 10.2关闭窗口
 
