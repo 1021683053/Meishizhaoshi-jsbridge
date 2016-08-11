@@ -82,14 +82,91 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="aui-content-padded">
             <pre><code class="json" id="json"></code></pre>
         </section>
 
+        <section class="aui-content">
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    卡片布局头部区域
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="http://placehold.it/750x300" data-original="http://meishizhaoshi.com/vendor/img/timeline/map.png" />
+                </div>
+                <div class="aui-card-list-footer">
+                    2016年7月12日
+                </div>
+            </div>
+
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    卡片布局头部区域
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="http://placehold.it/750x300" data-original="http://ww2.sinaimg.cn/mw1024/a15b4afegw1etsa790xqpj21kw0pndqm" />
+                </div>
+                <div class="aui-card-list-footer">
+                    2016年7月12日
+                </div>
+            </div>
+
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    卡片布局头部区域
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="http://placehold.it/750x300" data-original="http://ww2.sinaimg.cn/mw1024/a15b4afegw1eymb3g8k72j21kw11xk35" />
+                </div>
+                <div class="aui-card-list-footer">
+                    2016年7月12日
+                </div>
+            </div>
+
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    卡片布局头部区域
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="http://placehold.it/750x300" data-original="http://ww2.sinaimg.cn/mw1024/a15b4afejw1eef8wd9xoaj21kw11xkcn.jpg" />
+                </div>
+                <div class="aui-card-list-footer">
+                    2016年7月12日
+                </div>
+            </div>
+
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    卡片布局头部区域
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="http://placehold.it/750x300" data-original="http://ww2.sinaimg.cn/mw1024/a15b4afegw1ex101rnfi3j21kw0w0aoh" />
+                </div>
+                <div class="aui-card-list-footer">
+                    2016年7月12日
+                </div>
+            </div>
+
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    卡片布局头部区域
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="http://placehold.it/750x300" data-original="http://ww2.sinaimg.cn/mw1024/a15b4afejw1dycknh5w2zj" />
+                </div>
+                <div class="aui-card-list-footer">
+                    2016年7月12日
+                </div>
+            </div>
+
+        </section>
+
+
     </body>
 </html>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.js" charset="utf-8"></script>
 <script type="text/javascript">
 
     bridge.init(function(){
@@ -205,6 +282,13 @@
         });
 
 
+    });
+
+    $(function(){
+        $(".aui-card-list img").lazyload({
+            effect : "fadeIn",
+            threshold : 1
+        });
     });
 
 
