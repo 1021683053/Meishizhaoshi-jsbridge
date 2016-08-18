@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <title>jsbrige测试</title>
+        <script src="http://apps.bdimg.com/libs/fastclick/1.0.0/fastclick.min.js" charset="utf-8"></script>
+        <!-- <script src="../lib/amazeui-touch/dist/amazeui.touch.css" charset="utf-8"></script> -->
+        <link rel="stylesheet" href="../lib/aui/css/aui.2.0.css" charset="utf-8">
+     	<script type="text/javascript">
+            window.addEventListener('load', function() {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
+        <script src="../dist/jsbridge.js" charset="utf-8"></script>
+        <style media="screen">
+            button{ display: block; width: 100%; text-align: center; padding: 10px 0;}
+            .header {
+                padding: 2.5rem 0.5rem 2rem 0.5rem;
+            }
+            .header p{ font-size: 12px; color: #FFF; line-height: 1em;}
+            .clearfix{}
+            .clearfix:after{
+                content: '';
+                display: block;
+                clear: both;
+            }
+        </style>
+	</head>
+	<body>
+		<header class="aui-bar aui-bar-nav aui-text-left header" id="header">
+            <h1>
+                <a class="aui-btn aui-pull-right" tapmode onclick="openClub()">
+                    <i class="aui-iconfont aui-icon-question"></i>
+                </a>
+                JSBridge 1.0
+                <p>Test close window</p>
+            </h1>
+        </header>
+		<section class="aui-content-padded">
+            <div class="aui-row-padded clearfix">
+            	<div class="aui-col-xs-6">
+                    <button class="closeWindow">closeWindow</button>
+                </div>
+        	</div>
+    	</section>
+		<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+    	<script>
+	    	M.init(function(){
+
+	    		$('.closeWindow').on("click", function(){
+	    			// bridge.emit('prevBridgeCall', {handlerName: 'childenClose', param:{a:1,b:2}}, function(){
+	    			// });
+	    			M.emit('showLoading');
+                    // setTimeout(function () {
+                    //     var json = {name:'Liweifeng'};
+                    //     bridge.emit('prevBridgeCall', {handlerName: 'childenClose', param:json}, function(){
+	    			// 	});
+	    			// 	bridge.emit('closeWindow', {}, function( response ){
+			        //         alert( JSON.stringify( response) );
+			        //     });
+			        //     bridge.emit('hideLoading', {}, function(){});
+                    // }, 3000);
+	    			$.get("https://api.github.com/repos/vuejs/vue/commits?per_page=10&sha=master", function(json){
+	    				M.emit('prevBridgeCall', {handlerName: 'childenClose', param:json}, function(){
+	    				});
+	    				M.emit('closeWindow', {}, function( response ){
+			                alert( JSON.stringify( response) );
+			            });
+			            M.emit('hideLoading', {}, function(){});
+	    			}, 'json');
+		        });
+
+	        });
+    	</script>
+	</body>
+</html>
