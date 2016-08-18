@@ -383,3 +383,19 @@ iOS目前支持： tel:// http:// ….系统支持的这里都行, 包括跳转�
 | ----------- | ------ | ------------------ |
 | handlerName | String | 前一个WebView已注册的方法名称 |
 | param       | Object | 需要传递到该函数中的参数值      |
+
+#### 14. setRightItem
+
+描述：设置右上角按钮的操作 （iOS, Android）
+
+接口：setRightItem
+
+参数：param
+
+| 参数名称          | 参数类型       | 参数描述               |
+| ------------- | ---------- | ------------------ |
+| title         | String<必须> | 按钮的标题              |
+| titleHexColor | String<必须> | 按钮标题文字颜色 比如：34A3FF |
+| font          | String<必须> | 按钮标题文字字体大小         |
+
+注：回调直接使用 callBack
