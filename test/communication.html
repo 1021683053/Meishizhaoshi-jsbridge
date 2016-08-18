@@ -60,9 +60,16 @@
 			        //     });
 			        //     bridge.emit('hideLoading', {}, function(){});
                     // }, 3000);
+                    // setTimeout(function () {
+                    //     var json = {name:'Liweifeng'};
+                    //     M.parent("childenClose", json);
+                    // }, 3000);
+
 	    			$.get("https://api.github.com/repos/vuejs/vue/commits?per_page=10&sha=master", function(json){
-	    				M.emit('prevBridgeCall', {handlerName: 'childenClose', param:json}, function(){
-	    				});
+	    				// M.emit('prevBridgeCall', {handlerName: 'childenClose', param:json}, function(){
+                        //
+                        // });
+                        M.parent("childenClose", json);
 	    				M.emit('closeWindow', {}, function( response ){
 			                alert( JSON.stringify( response) );
 			            });

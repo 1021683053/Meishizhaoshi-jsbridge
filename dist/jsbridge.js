@@ -90,6 +90,13 @@
     var M = function(){};
     M.prototype = bridge;
 
+    // API请求map
+    var amap = {
+        B : "Busi", //商家服务器
+        U : "User", //用户服务器
+        S : "Static" //静态文件服务器
+    };
+
     //类型判断
     function isType(type) {
         return function(obj) {
@@ -346,6 +353,113 @@
         var outro = [];
             outro.push(param);
         var args = build_args(outro, "showAlert" );
+        this.emit.apply(bridge, args);
+    };
+
+    //message 消息框
+    M.prototype.message = function(message){
+        var intro = [].slice.call(arguments),
+            outro = [];
+            outro.push({message:intro[0]});
+        var args = build_args(outro, "showMessage" );
+        this.emit.apply(bridge, args);
+    };
+
+    //停止刷新
+    M.prototype.stoppull = function(){
+        var args = build_args(arguments, "stopPullRefreshWebView" );
+        this.emit.apply(bridge, args);
+    };
+
+    //关闭窗口
+    M.prototype.close = function(){
+        var args = build_args(arguments, "closeWindow" );
+        this.emit.apply(bridge, args);
+    };
+
+    //通过native get请求数据
+    M.prototype.GET = function(){
+        var intro = [].slice.call(arguments),
+            outro = [],
+            param = {
+                path: '/',
+                param: {},
+                method: "GET",
+                host: amap['B']
+            },
+            callback;
+
+        if( isFunction( intro[ intro.length-1 ] ) ){
+            callback = intro[intro.length-1];
+        };
+        if( isString( intro[1] ) ){
+            param.path = intro[1];
+        };
+        if( isObject( intro[2] ) ){
+            param.param = intro[2];
+        };
+        param.host = amap[intro[0]];
+        outro.push(param, callback);
+        var args = build_args(outro, "sendApi" );
+        this.emit.apply(bridge, args);
+    };
+
+    //通过native post请求数据
+    M.prototype.POST = function(){
+        var intro = [].slice.call(arguments),
+            outro = [],
+            param = {
+                path: '/',
+                param: {},
+                method: "POST",
+                host: amap['B']
+            },
+            callback;
+
+        if( isFunction( intro[ intro.length-1 ] ) ){
+            callback = intro[intro.length-1];
+        };
+        if( isString( intro[1] ) ){
+            param.path = intro[1];
+        };
+        if( isObject( intro[2] ) ){
+            param.param = intro[2];
+        };
+        param.host = amap[intro[0]];
+        outro.push(param, callback);
+        var args = build_args(outro, "sendApi" );
+        this.emit.apply(bridge, args);
+    };
+
+    //打开原生组件
+    M.prototype.sys = function(identifier, param){
+        var outro = {identifier:identifier, param: isObject(param) ? param : {}};
+        var args = build_args([outro], "openWindow" );
+        this.emit.apply(bridge, args);
+    };
+
+    //调用上一层注册
+    M.prototype.parent = function(handlerName, param){
+        var outro = {handlerName:handlerName, param: param || {}};
+        var args = build_args([outro], "prevBridgeCall" );
+        this.emit.apply(bridge, args);
+    };
+
+    //开启导航按钮
+    M.prototype.EnableRight = function(text){
+        var param = {
+            title: "确定",
+            titleHexColor: "#000000",
+            font: "16"
+        };
+        param.title = text ? text: "确定";
+        var args = build_args([param], "setRightItem" );
+        this.emit.apply(bridge, args);
+    };
+
+    //下拉功能开启
+    M.prototype.EnablePull = function(){
+        var args = build_args(arguments, "addPullRefreshWebView" );
         this.emit.apply(bridge, args);
     };
 

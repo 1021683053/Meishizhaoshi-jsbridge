@@ -95,6 +95,9 @@
                 <div class="aui-col-xs-6">
                     <button class="openCloseWindow">openCloseWindow</button>
                 </div>
+                <div class="aui-col-xs-6">
+                    <button class="setRightItem">setRightItem</button>
+                </div>
             </div>
         </section>
 
@@ -258,35 +261,42 @@
             //     alert(cid);
             // });
             M.confirm("eeeeeeeee", function(cid){
-                alert(cid);
+                alert(cid+"确定");
+            }, function(cid){
+                alert(cid+"取消");
             });
         });
         $('.sendApi').on("click", function(){
-            M.emit('showLoading');
-
-            var param = {};
-            param.path = '/call.json';
-            param.param = {};
-            param.method = "GET";
-            param.host = "Busi";
-            M.emit('sendApi', param, function( response ){
-                M.emit('hideLoading', {}, function(){});
+            // M.emit('showLoading');
+            //
+            // var param = {};
+            // param.path = '/call.json';
+            // param.param = {};
+            // param.method = "GET";
+            // param.host = "Busi";
+            // M.emit('sendApi', param, function( response ){
+            //     M.emit('hideLoading', {}, function(){});
+            //     $("#json").html(JSON.stringify( response));
+            //     // alert( JSON.stringify( response) );
+            // });
+            M.GET('B', '/call.json', function( response ){
                 $("#json").html(JSON.stringify( response));
-                // alert( JSON.stringify( response) );
             });
 
         });
 
         $('.addPullRefreshWebView').on("click", function(){
-            M.emit('addPullRefreshWebView', {}, function( response ){
-                alert( JSON.stringify( response) );
-            });
+            M.EnablePull();
+            // M.emit('addPullRefreshWebView', {}, function( response ){
+            //     alert( JSON.stringify( response) );
+            // });
         });
 
         $('.stopPullRefreshWebView').on("click", function(){
-            M.emit('stopPullRefreshWebView', {}, function( response ){
-                alert( JSON.stringify( response) );
-            });
+            M.stopull();
+            // M.emit('stopPullRefreshWebView', {}, function( response ){
+            //     alert( JSON.stringify( response) );
+            // });
         });
 
         $('.openSysURL').on("click", function(){
@@ -296,42 +306,56 @@
             // });
         });
         $('.aui-icon-question').on("click", function(){
-            M.emit('showMessage', {message:"尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。", buttonTitle:"知道了"}, function( response ){
-                alert( JSON.stringify( response) );
-            });
+            M.message("尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。");
+            // M.emit('showMessage', {message:"尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。", buttonTitle:"知道了"}, function( response ){
+            //     alert( JSON.stringify( response) );
+            // });
         });
 
         $('.openWindow').on("click", function(){
-            M.emit('openWindow', {identifier: "AVCreateShortViewController", param:{}}, function( response ){
-                alert( JSON.stringify( response) );
-            });
+            // M.emit('openWindow', {identifier: "AVCreateShortViewController", param:{}}, function( response ){
+            //     alert( JSON.stringify( response) );
+            // });
+            M.sys('AVCreateShortViewController');
         })
         $('.openWindow_android').on("click", function(){
-            M.emit('openWindow', {identifier: "CompanyInfo", param:{other: "6160715011319419", noteName:"李帅SB"}}, function( response ){
-                alert( JSON.stringify( response) );
-            });
+            M.sys('CompanyInfo', {other: "6160715011319419", noteName:"李帅SB"});
+            // M.emit('openWindow', {identifier: "CompanyInfo", param:{other: "6160715011319419", noteName:"李帅SB"}}, function( response ){
+            //     alert( JSON.stringify( response) );
+            // });
         });
         $('.closeWindow').on("click", function(){
-            M.emit('closeWindow', {}, function( response ){
-                alert( JSON.stringify( response) );
-            });
+            M.close();
         })
 
         $('.openCloseWindow').on("click", function(){
-            M.emit('openURL', {url:"http://10.0.0.219:8000/test/communication.html"}, function(){})
+            M.link("/test/communication.html");
+            // M.emit('openURL', {url:"http://10.0.0.219:8000/test/communication.html"}, function(){})
         });
-
-        M.on('alertClick', function(response){
-            alert( JSON.stringify( response) );
+        $('.setRightItem').on("click", function(){
+            M.EnableRight("李帅是傻逼！");
+            // M.emit('setRightItem', {
+            //     title: "李帅SB(打赏)",
+            //     titleHexColor: "#000000",
+            //     font: "16"
+            // }, function(){
+            //     alert();
+            // });
         });
 
         M.on('refreshTriggered', function(response){
-            M.emit('stopPullRefreshWebView', {}, function(){});
+            setTimeout(function () {
+                M.stoppull();
+            }, 4000);
             // alert( JSON.stringify( response) );
         });
 
         M.on('childenClose', function(response){
             $("#json").html(JSON.stringify( response));
+        });
+
+        M.on('rightItemOnClick', function(response){
+            alert("123");
             // window.location.href="http://baidu.com";
             // alert( JSON.stringify( response) );
         });
