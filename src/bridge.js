@@ -27,3 +27,12 @@
         var args = [].slice.call(arguments);
         bridge.native.callHandler.apply(handler, args);
     };
+
+    //暴露接口
+    bridge.client = client;
+    bridge.isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1;
+    bridge.isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    bridge.base = "http://10.0.0.1:8080";
+
+    //初始化
+    bridge.init();
