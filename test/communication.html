@@ -69,7 +69,7 @@
 	    				// M.emit('prevBridgeCall', {handlerName: 'childenClose', param:json}, function(){
                         //
                         // });
-                        M.parent("childenClose", json);
+                        M.parent(json);
 	    				M.emit('closeWindow', {}, function( response ){
 			                alert( JSON.stringify( response) );
 			            });

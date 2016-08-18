@@ -1,5 +1,13 @@
     //M暴露对外接口
-    var M = function(){};
+    var M = function(){
+        this.config = [
+            { name: 'pull', event: 'refreshTriggered', type: 'on' },
+            { name: 'close', event: 'childenClose', type: 'on' },
+            { name: 'right', event: 'rightItemOnClick', type: 'on' },
+            { name: 'enableRight', event: 'EnableRight', type: 'emit' },
+            { name: 'enablePull', event: 'EnablePull', type: 'emit' }
+        ]
+    };
     M.prototype = bridge;
 
     // API请求map
@@ -80,7 +88,19 @@
             ret += chars[id];
         }
         return ret;
-    }
+    };
+
+    //增添配置表
+    function configure( config, name, flag){
+        for( var i=0; i<config.length; i++ ){
+            if( config[i].name == name && config[i].type == "on" ){
+                config[i].cb = flag;
+            }
+            if( config[i].name == name && config[i].type == "emit" ){
+                config[i].enable = flag;
+            }
+        }
+    };
 
     //继承
     function extend(to){
@@ -351,7 +371,10 @@
     };
 
     //调用上一层注册
-    M.prototype.parent = function(handlerName, param){
+    M.prototype.parent = function(){
+        var intro = [].slice.call(arguments);
+        var handlerName = intro[1] ? intro[0] :'childenClose';
+        var param = intro[intro.length-1];
         var outro = {handlerName:handlerName, param: param || {}};
         var args = build_args([outro], "prevBridgeCall" );
         this.emit.apply(bridge, args);
@@ -373,4 +396,34 @@
     M.prototype.EnablePull = function(){
         var args = build_args(arguments, "addPullRefreshWebView" );
         this.emit.apply(bridge, args);
+    };
+
+    // 开启配置
+    M.prototype.configure = function(options){
+        var config = this.config;
+        if( !isObject(options) ){
+            return this;
+        }
+        for( var key in options ){
+            configure(config, key, options[key]);
+        }
+        return this;
+    };
+
+    //加载完成
+    M.prototype.onload = function(){
+        var cb = ([].slice.call(arguments))[0];
+        var self = this;
+        var config = this.config;
+        this.init(function(){
+            for( var i=0; i< config.length; i++ ){
+                if( config[i]['cb'] ){
+                    self.on(config[i]['event'], config[i]['cb'] );
+                }
+                if( config[i]['enable'] ){
+                    self[config[i]['event']]( config[i]['enable'] );
+                }
+            }
+            cb();
+        });
     };

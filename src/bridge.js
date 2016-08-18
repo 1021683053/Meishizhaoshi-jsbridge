@@ -35,4 +35,4 @@
     bridge.base = "http://10.0.0.1:8080";
 
     //初始化
-    bridge.init();
+    // bridge.init();

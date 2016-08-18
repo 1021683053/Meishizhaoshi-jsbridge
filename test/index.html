@@ -187,7 +187,21 @@
 <script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.js" charset="utf-8"></script>
 <script type="text/javascript">
 
-    M.init(function(){
+    M.configure({
+        right: function(){
+            alert(1);
+        },
+        pull: function(){
+            setTimeout(function () {
+                M.stoppull();
+            }, 3000);
+        },
+        close: function(response){
+            $("#json").html(JSON.stringify( response));
+        },
+        enableRight: "保存",
+        enablePull: true
+    }).onload(function(){
         $(".header p").text(JSON.stringify( navigator.userAgent ));
 
         $('.showShareView').on("click", function(){
@@ -343,22 +357,22 @@
             // });
         });
 
-        M.on('refreshTriggered', function(response){
-            setTimeout(function () {
-                M.stoppull();
-            }, 4000);
-            // alert( JSON.stringify( response) );
-        });
-
-        M.on('childenClose', function(response){
-            $("#json").html(JSON.stringify( response));
-        });
-
-        M.on('rightItemOnClick', function(response){
-            alert("123");
-            // window.location.href="http://baidu.com";
-            // alert( JSON.stringify( response) );
-        });
+        // M.on('refreshTriggered', function(response){
+        //     setTimeout(function () {
+        //         M.stoppull();
+        //     }, 4000);
+        //     // alert( JSON.stringify( response) );
+        // });
+        //
+        // M.on('childenClose', function(response){
+        //     $("#json").html(JSON.stringify( response));
+        // });
+        //
+        // M.on('rightItemOnClick', function(response){
+        //     alert("123");
+        //     // window.location.href="http://baidu.com";
+        //     // alert( JSON.stringify( response) );
+        // });
 
     });
 
