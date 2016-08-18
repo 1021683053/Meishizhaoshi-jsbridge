@@ -398,4 +398,4 @@ iOS目前支持： tel:// http:// ….系统支持的这里都行, 包括跳转�
 | titleHexColor | String<必须> | 按钮标题文字颜色 比如：34A3FF |
 | font          | String<必须> | 按钮标题文字字体大小         |
 
-注：回调直接使用 callBack
+注：回调直接使用 Web端注册的 rightItemOnClick方法, 参数为nil
