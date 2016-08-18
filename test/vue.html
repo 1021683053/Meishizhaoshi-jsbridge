@@ -50,7 +50,7 @@
         * Actual demo
         */
 
-        bridge.init(function(){
+        M.init(function(){
             var demo = new Vue({
 
             el: '#demo',
@@ -81,20 +81,20 @@
 
             methods: {
                 fetchData: function () {
-                      bridge.emit('showLoading');
+                      M.emit('showLoading');
                       var xhr = new XMLHttpRequest()
                       var self = this
                       xhr.open('GET', apiURL + self.currentBranch)
                       xhr.onload = function () {
                         self.commits = JSON.parse(xhr.responseText)
                         console.log(self.commits[0].html_url);
-                        bridge.emit('hideLoading', {}, function(){});
+                        M.emit('hideLoading', {}, function(){});
                       }
                       xhr.send()
                   },
                   link: function(event){
                       var link = event.currentTarget.getAttribute('m-href');
-                      bridge.emit("openURL", {url: link});
+                      M.emit("openURL", {url: link});
                   }
             }
             })
