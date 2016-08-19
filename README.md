@@ -399,3 +399,25 @@ iOS目前支持： tel:// http:// ….系统支持的这里都行, 包括跳转�
 | font          | String<必须> | 按钮标题文字字体大小         |
 
 注：回调直接使用 Web端注册的 rightItemOnClick方法, 参数为nil
+
+#### 15. popToRoot
+
+描述：返回到学生端首页（Android）; 返回到顶级视图控制器（iOS）
+
+接口：popToRoot
+
+参数：空
+
+#### 16. canBounced
+
+描述：是否可以回弹（iOS）
+
+接口：canBounced
+
+参数：param
+
+| 参数名称    | 参数类型       | 参数描述                                 |
+| ------- | ---------- | ------------------------------------ |
+| bounced | String<必须> | 是否可以回弹 值： yes, no 字串, webView默认为可以回弹 |
+
+​	
