@@ -63,7 +63,7 @@
     bridge.base = "http://10.0.0.1:8080";
 
     //初始化
-    bridge.init();
+    // bridge.init();
 
     //柯理化
     function currying(fn) {
@@ -87,8 +87,23 @@
     };
 
     //M暴露对外接口
-    var M = function(){};
+    var M = function(){
+        this.config = [
+            { name: 'pull', event: 'refreshTriggered', type: 'on' },
+            { name: 'close', event: 'childenClose', type: 'on' },
+            { name: 'right', event: 'rightItemOnClick', type: 'on' },
+            { name: 'enableRight', event: 'EnableRight', type: 'emit' },
+            { name: 'enablePull', event: 'EnablePull', type: 'emit' }
+        ]
+    };
     M.prototype = bridge;
+
+    // API请求map
+    var amap = {
+        B : "Busi", //商家服务器
+        U : "User", //用户服务器
+        S : "Static" //静态文件服务器
+    };
 
     //类型判断
     function isType(type) {
@@ -161,7 +176,19 @@
             ret += chars[id];
         }
         return ret;
-    }
+    };
+
+    //增添配置表
+    function configure( config, name, flag){
+        for( var i=0; i<config.length; i++ ){
+            if( config[i].name == name && config[i].type == "on" ){
+                config[i].cb = flag;
+            }
+            if( config[i].name == name && config[i].type == "emit" ){
+                config[i].enable = flag;
+            }
+        }
+    };
 
     //继承
     function extend(to){
@@ -349,6 +376,145 @@
         this.emit.apply(bridge, args);
     };
 
+    //message 消息框
+    M.prototype.message = function(message){
+        var intro = [].slice.call(arguments),
+            outro = [];
+            outro.push({message:intro[0]});
+        var args = build_args(outro, "showMessage" );
+        this.emit.apply(bridge, args);
+    };
+
+    //停止刷新
+    M.prototype.stoppull = function(){
+        var args = build_args(arguments, "stopPullRefreshWebView" );
+        this.emit.apply(bridge, args);
+    };
+
+    //关闭窗口
+    M.prototype.close = function(){
+        var args = build_args(arguments, "closeWindow" );
+        this.emit.apply(bridge, args);
+    };
+
+    //通过native get请求数据
+    M.prototype.GET = function(){
+        var intro = [].slice.call(arguments),
+            outro = [],
+            param = {
+                path: '/',
+                param: {},
+                method: "GET",
+                host: amap['B']
+            },
+            callback;
+
+        if( isFunction( intro[ intro.length-1 ] ) ){
+            callback = intro[intro.length-1];
+        };
+        if( isString( intro[1] ) ){
+            param.path = intro[1];
+        };
+        if( isObject( intro[2] ) ){
+            param.param = intro[2];
+        };
+        param.host = amap[intro[0]];
+        outro.push(param, callback);
+        var args = build_args(outro, "sendApi" );
+        this.emit.apply(bridge, args);
+    };
+
+    //通过native post请求数据
+    M.prototype.POST = function(){
+        var intro = [].slice.call(arguments),
+            outro = [],
+            param = {
+                path: '/',
+                param: {},
+                method: "POST",
+                host: amap['B']
+            },
+            callback;
+
+        if( isFunction( intro[ intro.length-1 ] ) ){
+            callback = intro[intro.length-1];
+        };
+        if( isString( intro[1] ) ){
+            param.path = intro[1];
+        };
+        if( isObject( intro[2] ) ){
+            param.param = intro[2];
+        };
+        param.host = amap[intro[0]];
+        outro.push(param, callback);
+        var args = build_args(outro, "sendApi" );
+        this.emit.apply(bridge, args);
+    };
+
+    //打开原生组件
+    M.prototype.sys = function(identifier, param){
+        var outro = {identifier:identifier, param: isObject(param) ? param : {}};
+        var args = build_args([outro], "openWindow" );
+        this.emit.apply(bridge, args);
+    };
+
+    //调用上一层注册
+    M.prototype.parent = function(){
+        var intro = [].slice.call(arguments);
+        var handlerName = intro[1] ? intro[0] :'childenClose';
+        var param = intro[intro.length-1];
+        var outro = {handlerName:handlerName, param: param || {}};
+        var args = build_args([outro], "prevBridgeCall" );
+        this.emit.apply(bridge, args);
+    };
+
+    //开启导航按钮
+    M.prototype.EnableRight = function(text){
+        var param = {
+            title: "确定",
+            titleHexColor: "#000000",
+            font: "16"
+        };
+        param.title = text ? text: "确定";
+        var args = build_args([param], "setRightItem" );
+        this.emit.apply(bridge, args);
+    };
+
+    //下拉功能开启
+    M.prototype.EnablePull = function(){
+        var args = build_args(arguments, "addPullRefreshWebView" );
+        this.emit.apply(bridge, args);
+    };
+
+    // 开启配置
+    M.prototype.configure = function(options){
+        var config = this.config;
+        if( !isObject(options) ){
+            return this;
+        }
+        for( var key in options ){
+            configure(config, key, options[key]);
+        }
+        return this;
+    };
+
+    //加载完成
+    M.prototype.onload = function(){
+        var cb = ([].slice.call(arguments))[0];
+        var self = this;
+        var config = this.config;
+        this.init(function(){
+            for( var i=0; i< config.length; i++ ){
+                if( config[i]['cb'] ){
+                    self.on(config[i]['event'], config[i]['cb'] );
+                }
+                if( config[i]['enable'] ){
+                    self[config[i]['event']]( config[i]['enable'] );
+                }
+            }
+            cb();
+        });
+    };
 
     // RequireJS && SeaJS
     if (typeof define === 'function') {

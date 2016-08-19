@@ -9,7 +9,7 @@ var sources = [
     'src/util.js',
     'src/set.js',
     'src/m.js',
-    'src/exports.js',
+    // 'src/exports.js',
     'src/outro.js'
 ];
 
