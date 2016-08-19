@@ -399,3 +399,11 @@ iOS目前支持： tel:// http:// ….系统支持的这里都行, 包括跳转�
 | font          | String<必须> | 按钮标题文字字体大小         |
 
 注：回调直接使用 Web端注册的 rightItemOnClick方法, 参数为nil
+
+#### 15. popToRoot
+
+描述：返回到学生端首页（Android）; 返回到顶级视图控制器（iOS）
+
+接口：popToRoot
+
+参数：空
