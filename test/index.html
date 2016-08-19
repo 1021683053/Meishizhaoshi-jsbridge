@@ -206,42 +206,27 @@
 
         $('.showShareView').on("click", function(){
             M.share({text: "我们以 Vue 数据绑定的快速导览开始。如果你对高级概述更感兴趣，可查看这篇博文。", url:"http://baidu.com", title: "Liming SSSBBB!"});
-            // M.emit('showShareView', {text: "我们以 Vue 数据绑定的快速导览开始。如果你对高级概述更感兴趣，可查看这篇博文。", url:"http://baidu.com", title: "Liming SSSBBB!"}, function(response){
-            //     alert( JSON.stringify(response) );
-            // });
         });
         $('.openCityChooseView').on("click", function(){
             M.cityview(function(response){
                 alert( JSON.stringify(response) );
             });
-            // M.emit('openCityChooseView', {}, function(response){
-            //     alert( JSON.stringify( response) );
-            // });
         });
 
         $('.getCityNameAndId').on("click", function(){
             M.city(function(response){
                 alert( JSON.stringify(response) );
             });
-            // M.emit('getCityNameAndId', {}, function(response){
-            //     alert( JSON.stringify( response) );
-            // });
         });
 
         $('.refreshWebView').on("click", function(){
             M.reload();
-            // M.emit('refreshWebView', {}, function(response){
-            //     alert( JSON.stringify( response) );
-            // });
         });
 
         $('.getUserToken').on("click", function(){
             M.token(function(response){
                 alert( JSON.stringify(response) );
             });
-            // M.emit('getUserToken', {}, function(response){
-            //     alert( JSON.stringify( response) );
-            // });
         });
 
         $('.showLoading').on("click", function(){
@@ -249,31 +234,13 @@
             setTimeout(function () {
                 M.unloader();
             }, 4000);
-            // M.emit('showLoading', {text:"加 载 中..."});
-            // setTimeout(function () {
-            //     M.emit('hideLoading', {}, function(){});
-            // }, 3000);
         });
 
         $('.openURL').on("click", function(){
             M.link("/");
-            // M.link("http://baidu.com");
-            // M.emit('openURL', {url:"http://10.0.0.219:8000"}, function( response ){
-            //     alert( JSON.stringify( response) );
-            // });
         });
 
         $('.showAlert').on("click", function(){
-            // M.alert({
-            //     title: "Liweifeng",
-            //     message: "哈哈哈哈哈哈",
-            //     confirmTitle: "你点我试试！"
-            // }, function(){
-            //     alert();
-            // });
-            // M.alert("为了简单，服务器将会使用一个 JSON 文件作为数据库。不能在生产环境中采用这种做法，但是这样做确实简化了模拟后端 API 的工作。一旦启动了这个服务器，它就能提供我们需要的 API 接口，同时也能生成并发送我们需要的页面。许多人使用React作为MVC架构的V层。 尽管React并没有假设过你的其余技术栈， 但它仍可以作为一个小特征轻易地在已有项目中使用", "消息提示", function(cid){
-            //     alert(cid);
-            // });
             M.confirm("eeeeeeeee", function(cid){
                 alert(cid+"确定");
             }, function(cid){
@@ -281,18 +248,6 @@
             });
         });
         $('.sendApi').on("click", function(){
-            // M.emit('showLoading');
-            //
-            // var param = {};
-            // param.path = '/call.json';
-            // param.param = {};
-            // param.method = "GET";
-            // param.host = "Busi";
-            // M.emit('sendApi', param, function( response ){
-            //     M.emit('hideLoading', {}, function(){});
-            //     $("#json").html(JSON.stringify( response));
-            //     // alert( JSON.stringify( response) );
-            // });
             M.GET('B', '/call.json', function( response ){
                 $("#json").html(JSON.stringify( response));
             });
@@ -301,42 +256,24 @@
 
         $('.addPullRefreshWebView').on("click", function(){
             M.EnablePull();
-            // M.emit('addPullRefreshWebView', {}, function( response ){
-            //     alert( JSON.stringify( response) );
-            // });
         });
 
         $('.stopPullRefreshWebView').on("click", function(){
             M.stopull();
-            // M.emit('stopPullRefreshWebView', {}, function( response ){
-            //     alert( JSON.stringify( response) );
-            // });
         });
 
         $('.openSysURL').on("click", function(){
             M.oslink('http://taobao.com');
-            // M.emit('openSysURL', {URL: 'http://baidu.com'}, function( response ){
-            //     alert( JSON.stringify( response) );
-            // });
         });
         $('.aui-icon-question').on("click", function(){
             M.message("尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。");
-            // M.emit('showMessage', {message:"尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。", buttonTitle:"知道了"}, function( response ){
-            //     alert( JSON.stringify( response) );
-            // });
         });
 
         $('.openWindow').on("click", function(){
-            // M.emit('openWindow', {identifier: "AVCreateShortViewController", param:{}}, function( response ){
-            //     alert( JSON.stringify( response) );
-            // });
             M.sys('AVCreateShortViewController');
         })
         $('.openWindow_android').on("click", function(){
             M.sys('CompanyInfo', {other: "6160715011319419", noteName:"李帅SB"});
-            // M.emit('openWindow', {identifier: "CompanyInfo", param:{other: "6160715011319419", noteName:"李帅SB"}}, function( response ){
-            //     alert( JSON.stringify( response) );
-            // });
         });
         $('.closeWindow').on("click", function(){
             M.close();
@@ -344,36 +281,10 @@
 
         $('.openCloseWindow').on("click", function(){
             M.link("/test/communication.html");
-            // M.emit('openURL', {url:"http://10.0.0.219:8000/test/communication.html"}, function(){})
         });
         $('.setRightItem').on("click", function(){
             M.EnableRight("李帅是傻逼！");
-            // M.emit('setRightItem', {
-            //     title: "李帅SB(打赏)",
-            //     titleHexColor: "#000000",
-            //     font: "16"
-            // }, function(){
-            //     alert();
-            // });
         });
-
-        // M.on('refreshTriggered', function(response){
-        //     setTimeout(function () {
-        //         M.stoppull();
-        //     }, 4000);
-        //     // alert( JSON.stringify( response) );
-        // });
-        //
-        // M.on('childenClose', function(response){
-        //     $("#json").html(JSON.stringify( response));
-        // });
-        //
-        // M.on('rightItemOnClick', function(response){
-        //     alert("123");
-        //     // window.location.href="http://baidu.com";
-        //     // alert( JSON.stringify( response) );
-        // });
-
     });
 
     $(function(){
