@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bulid": "gulp bulid",
+    "upload": "gulp upload",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +26,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglifyjs": "^0.6.2"
+    "gulp-uglifyjs": "^0.6.2",
+    "qiniu": "^6.1.11"
   }
 }
