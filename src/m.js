@@ -398,6 +398,13 @@
         this.emit.apply(bridge, args);
     };
 
+    //关闭橡皮筋
+    M.prototype.DisableElastic = function(){
+        var param = {};
+        param.bounced = "no";
+        this.emit('canBounced', param, function(){});
+    };
+
     // 开启配置
     M.prototype.configure = function(options){
         var config = this.config;
