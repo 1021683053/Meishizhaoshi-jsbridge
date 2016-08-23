@@ -28,29 +28,153 @@ _*注：向后追加版本号*_
 ## package
 
 ```
-    npm install
-    npm run bulid
-    .
-    .
-    .
-    `dist/jsbridge.js`
-    `dist/jsbridge.min.js`
+npm install
+npm run bulid
+.
+.
+.
+`dist/jsbridge.js`
+`dist/jsbridge.min.js`
 ```
 ## useage
-    global variable is `bridge`
+    global variable is `M`
     - require.js, seajs
-    - window.bridge
+    - window.M
 
 ## client
-    bridge.client
-    ​```
-        /*
-         * return
-         * version [!0][app version / [0]not in Meishizhaoshi app
-         * name Meishizhaoshi / 0
-         * category M/C
-         */
-    ​```
+M.client
+```
+/*
+ * return
+ * version [!0][app version / [0]not in Meishizhaoshi app
+ * name Meishizhaoshi / 0
+ * category M/C
+ */
+```
+## cdn
+
+upload Qiniu cdn server
+
+```shell
+npm run upload
+```
+use in html
+
+```html
+<script src="http://assets.meishizhaoshi.com/jsbridge.js" charset="utf-8" />
+<script src="http://assets.meishizhaoshi.com/jsbridge.min.js" charset="utf-8" />
+```
+## JavaScript API
+```javascript
+
+/* 分享
+ * param:{text:'', url: '', title: ''}, callback:分享跳回来的回调
+ */
+M.share(`param`, `callback`);
+
+
+/* 打开城市列表API
+ * callback
+ */
+M.cityview(`callback`);
+
+
+/* 直接获取城市详情
+ * callback
+ */
+M.city(`callback`);
+
+
+/* 刷新webview
+ */
+M.reload();
+
+
+/* 获取Token
+ * callback
+ */
+M.token(callback);
+
+
+/* 加载进度条
+ */
+M.inloader();
+
+
+/* 卸载进度条
+ */
+M.unloader();
+
+
+/* 打开一个页面
+ * url 仅支持绝对路径
+ */
+M.link(`url`);
+
+
+/* confirm弹窗
+ * text, callback_ok, callback_pass
+ */
+M.confirm(`text`, `callback_ok`, `callback_pass`);
+M.confirm(`text`, `callback_ok`);
+
+
+/* alert弹窗
+ * text, callback_ok
+ */
+M.alert(`text`, `callback_ok`);
+
+
+/* GET请求
+ * server:[B|C|S], api, callback
+ */
+M.GET(`server`, `api`, `callback`);
+
+
+/* POST请求
+ * server:[B|C|S], api, callback
+ */
+M.POST(`server`, `api`, `callback`);
+
+
+/* 打开下拉刷新功能
+ */
+M.EnablePull();
+
+
+/* 完成下拉来刷新
+ */
+M.stopull();
+
+
+/* message提示框
+ * text
+ */
+M.message(`text`);
+
+
+/* 打开系统浏览器
+ * url
+ */
+M.oslink(`url`);
+
+
+/* 关闭窗口
+ */
+M.close();
+
+
+/* 右侧按钮设置
+ * text
+ */
+M.EnableRight(`text`);
+
+/* 调用复层注册的 childenClose方法
+ * object
+ */
+M.parent(`object`);
+```
+--- 注：其他例子请看源码或者例子！ ---
 
 
 ## 功能需求
@@ -420,4 +544,4 @@ iOS目前支持： tel:// http:// ….系统支持的这里都行, 包括跳转�
 | ------- | ---------- | ------------------------------------ |
 | bounced | String<必须> | 是否可以回弹 值： yes, no 字串, webView默认为可以回弹 |
 
-​	
+​
