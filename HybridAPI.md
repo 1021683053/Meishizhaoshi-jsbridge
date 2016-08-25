@@ -25,22 +25,20 @@ http://tpl.zhaogeshi.me/{moduleName}/{tplid}.tpl?{param}
 
 参数列表
 
-|     参数名称      |  请求类型  |      | 是否必须 |             说明             |
-| :-----------: | :----: | :--: | :--: | :------------------------: |
-|      app      | String |      |  是   | 区别产品类别(商户 MEC、学生STU、保险INS) |
-|    version    | String |      |  是   |     本地Hybrid总控配置文件的版本号     |
-| moduleVersion | String |      |  是   |       本地Hybrid模块的版本        |
-
-*moduleVersion: moduleName=moduleVersion&m2=mv2*
+|  参数名称   |  请求类型  |      | 是否必须 |             说明             |
+| :-----: | :----: | :--: | :--: | :------------------------: |
+|   app   | String |      |  是   | 区别产品类别(商户 MEC、学生STU、保险INS) |
+| version | String |      |  是   |     本地Hybrid总控配置文件的版本号     |
 
 >  如果version、moduleVersion任意一项为空, 默认只会生成全新包
+>
+>  客户端本地做模块的差异对比
 
 数据请求示例, Content-Type: application/json
 
 ```json
 app: "MEC",
-version: "a4fc6",
-moduleVersion: "mainModule=v4frc&detailModule=k98ct"
+version: "a4fc6"
 ```
 
 #### 返回值
@@ -52,14 +50,12 @@ moduleVersion: "mainModule=v4frc&detailModule=k98ct"
         {
             "mid": "子模块名称/ID/唯一标识",
             "version": "子模块版本号字串, 一般为Git短版本号",
-            "del": "N", # 操作类型：是否删除本地模块 Y：删除 N：保留
             "packageurl": "http://um.devdylan.cn/bootstrap.zip", # 子模块下载地址
             "urls": {}, # 子模块URL映射表: `TPL标识：真实路径`
         },
         {
             "mid": "LeafModules",
             "version": "ib42",
-            "del": "N",
             "packageurl": "http://um.devdylan.cn/LeafModules.zip",
             "urls": {
                 "enter.tpl": "index.html",
@@ -75,8 +71,6 @@ moduleVersion: "mainModule=v4frc&detailModule=k98ct"
 注： 
 
 - 生成配置文件流程：客户端携带当前配置文件版本以及子模块版本号->发起请求->服务端处理请求：
-
-![](http://um.devdylan.cn/k9gf4.png)
 
 ## html5 前端文件加载
 
@@ -140,13 +134,13 @@ moduleVersion: "mainModule=v4frc&detailModule=k98ct"
 
 参数表单：param
 
-| 参数名称       | 参数类型   | 参数描述        |
-| ---------- | ------ | ----------- |
-| mid        | String | 子模块唯一标识     |
-| version    | String | 子模块版本       |
-| del        | String | 是否删除标识 默认为N |
-| packageurl | String | 子模块下载地址     |
-| urls       | Object | 映射表         |
+| 参数名称       | 参数类型   | 参数描述    |
+| ---------- | ------ | ------- |
+| mid        | String | 子模块唯一标识 |
+| version    | String | 子模块版本   |
+|            |        |         |
+| packageurl | String | 子模块下载地址 |
+| urls       | Object | 映射表     |
 
 返回值：
 
@@ -157,30 +151,9 @@ moduleVersion: "mainModule=v4frc&detailModule=k98ct"
   "data"   : {
             "mid": "子模块名称/ID/唯一标识",
             "version": "子模块版本号字串, 一般为Git短版本号",
-            "del": "N", # 操作类型：是否删除本地模块 Y：删除 N：保留
             "packageurl": "http://um.devdylan.cn/bootstrap.zip", # 子模块下载地址
             "urls": {}, # 子模块URL映射表: `TPL标识：真实路径`
   }
-}
-```
-
-###### 下线模块
-
-接口名称：deleteModule *设置模块的del属性为Y* 
-
-参数表单：param
-
-| 参数名称 | 参数类型   | 参数描述       |
-| ---- | ------ | ---------- |
-| mid  | String | 模块唯一标识     |
-| del  | String | Y：上线  N：下线 |
-
-返回值：
-
-```json
-{
-  "message": "上/下线成功！",
-  "status" : "successful"
 }
 ```
 
