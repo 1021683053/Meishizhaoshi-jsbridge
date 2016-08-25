@@ -50,7 +50,7 @@ moduleVersion: "mainModule=v4frc&detailModule=k98ct"
     "version": "WebApp 配置文件版本号",
     "module": [
         {
-            "mid": "子模块名称",
+            "mid": "子模块名称/ID/唯一标识",
             "version": "子模块版本号字串, 一般为Git短版本号",
             "del": "N", # 操作类型：是否删除本地模块 Y：删除 N：保留
             "packageurl": "http://um.devdylan.cn/bootstrap.zip", # 子模块下载地址
@@ -71,6 +71,12 @@ moduleVersion: "mainModule=v4frc&detailModule=k98ct"
 }
 ```
 > 可选：主动做文件CRC校验, 请勿使用MD5校验, 计算文件md5耗费大量时间。
+
+注： 
+
+- 生成配置文件流程：客户端携带当前配置文件版本以及子模块版本号->发起请求->服务端处理请求：
+
+![](http://um.devdylan.cn/k9gf4.png)
 
 ## html5 前端文件加载
 
@@ -108,15 +114,75 @@ moduleVersion: "mainModule=v4frc&detailModule=k98ct"
 
 ###### 更新模块
 
-提供新版本的模块版本号即可
+接口名称：updateModule *提供新版本的模块版本号即可*
+
+参数表单：param
+
+| 参数名称       | 参数类型   | 参数描述      |
+| ---------- | ------ | --------- |
+| mid        | String | 模块ID      |
+| version    | String | 新的Git短版本号 |
+| packageurl | String | 模块下载地址    |
+| urls       | Object | 对应规则      |
+
+返回值：
+
+```json
+{
+  "message": "更新成功!",
+  "status" : "successful",
+}
+```
 
 ###### 增加模块
 
-增加完整的模块配置
+接口名称：createModule *增加完整的模块配置*
+
+参数表单：param
+
+| 参数名称       | 参数类型   | 参数描述        |
+| ---------- | ------ | ----------- |
+| mid        | String | 子模块唯一标识     |
+| version    | String | 子模块版本       |
+| del        | String | 是否删除标识 默认为N |
+| packageurl | String | 子模块下载地址     |
+| urls       | Object | 映射表         |
+
+返回值：
+
+```json
+{
+  "message": "创建成功!",
+  "status" : "successful",
+  "data"   : {
+            "mid": "子模块名称/ID/唯一标识",
+            "version": "子模块版本号字串, 一般为Git短版本号",
+            "del": "N", # 操作类型：是否删除本地模块 Y：删除 N：保留
+            "packageurl": "http://um.devdylan.cn/bootstrap.zip", # 子模块下载地址
+            "urls": {}, # 子模块URL映射表: `TPL标识：真实路径`
+  }
+}
+```
 
 ###### 下线模块
 
-设置模块的del属性为Y
+接口名称：deleteModule *设置模块的del属性为Y* 
+
+参数表单：param
+
+| 参数名称 | 参数类型   | 参数描述       |
+| ---- | ------ | ---------- |
+| mid  | String | 模块唯一标识     |
+| del  | String | Y：上线  N：下线 |
+
+返回值：
+
+```json
+{
+  "message": "上/下线成功！",
+  "status" : "successful"
+}
+```
 
 
 
