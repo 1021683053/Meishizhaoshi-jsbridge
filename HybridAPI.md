@@ -25,70 +25,52 @@ http://tpl.zhaogeshi.me/{moduleName}/{tplid}.tpl?{param}
 
 参数列表
 
-|  参数名称  |  请求类型  |      | 是否必须 |       说明        |
-| :----: | :----: | :--: | :--: | :-------------: |
-| appKey | String |      |  是   |     appKey      |
-| appSec | String |      |  是   |     appSec      |
-| appVer | String |      |  是   | MSApp的Release版本 |
+|     参数名称      |  请求类型  |      | 是否必须 |             说明             |
+| :-----------: | :----: | :--: | :--: | :------------------------: |
+|      app      | String |      |  是   | 区别产品类别(商户 MEC、学生STU、保险INS) |
+|    version    | String |      |  是   |     本地Hybrid总控配置文件的版本号     |
+| moduleVersion | String |      |  是   |       本地Hybrid模块的版本        |
 
-头部数据
+*moduleVersion: moduleName=moduleVersion&m2=mv2*
 
-|        参数名称        |  请求类型  |      | 是否必须 |         说明         |
-| :----------------: | :----: | :--: | :--: | :----------------: |
-|    localVersion    | String |      |  否   | 本地MSWebApp的配置文件版本号 |
-| localModuleVersion | String |      |  否   |      本地模块的版本号      |
-
-*localModuleVersion: moduleName=moduleVersion&m2=mv2*
-
->  如果localVersion、localModuleVersion任意一项为空, 默认只会生成全新包
+>  如果version、moduleVersion任意一项为空, 默认只会生成全新包
 
 数据请求示例, Content-Type: application/json
 
 ```json
-appKey: "zTky32-87jvw",
-appSec: "s87c0cat13ngvu4dvrjfr1iv982b3c4m",
-appVer: "1.0.0"
-
-#HTTP Header Fields.
-localVersion: "3fc45g",
-localModuleVersion: "commonModule=3fv5cd&detailModule=8vg3fc"
+app: "MEC",
+version: "a4fc6",
+moduleVersion: "mainModule=v4frc&detailModule=k98ct"
 ```
 
 #### 返回值
 
-```
+```json
 {
-    "version": "MSApp Version, User String. (Git short version)",
-    "opt": "N", # App options. M: Cover local files. N: Nothing handler. D: Delete.
-    "module": [					 #Sub modules.
+    "version": "WebApp 配置文件版本号",
+    "module": [
         {
-            "mid": "bootstrap",    # Module id.
-            "urls": {},			  # Module url maps. e.g: {"enter.tpl": "index.html"}. Should be An object.
-            "version": "c901",     # Module short version. (Git short version)
-            "opt": "N",            # Module options. M: Cover local files. N: Nothing handler. D: Delete
-            "packageurl": "http://um.devdylan.cn/bootstrap.zip", # Module zip download url.
-            "config": {
-                "key": "value"     # Value needs inject to javascript dynamic.
-            }
+            "mid": "子模块名称",
+            "version": "子模块版本号字串, 一般为Git短版本号",
+            "del": "N", # 操作类型：是否删除本地模块 Y：删除 N：保留
+            "packageurl": "http://um.devdylan.cn/bootstrap.zip", # 子模块下载地址
+            "urls": {}, # 子模块URL映射表: `TPL标识：真实路径`
         },
         {
             "mid": "LeafModules",
             "version": "ib42",
-            "opt": "N",
+            "del": "N",
             "packageurl": "http://um.devdylan.cn/LeafModules.zip",
             "urls": {
                 "enter.tpl": "index.html",
                 "classPayment.tpl": "classPayment.html",
                 "detail.tpl": "detail/detail.html"
             },
-            "config": {
-                "key": "value"
-            }
         }
     ]
 }
 ```
-> 使用前主动做文件CRC校验, 请勿使用MD5校验, 计算文件md5耗费大量时间。
+> 可选：主动做文件CRC校验, 请勿使用MD5校验, 计算文件md5耗费大量时间。
 
 ## html5 前端文件加载
 
@@ -113,3 +95,29 @@ localModuleVersion: "commonModule=3fv5cd&detailModule=8vg3fc"
 </body>
 </html>
 ```
+
+#### 注：
+
+- 所有的子模块解压到`统一级别目录下`，模块间调用使用相对路径。
+- 打开新窗口可使用.tpl访问本地模块，如果本地模块不存在则访问线上模块。
+- 保险类WebApp中web容器均需为全屏容器，并提供open方法以打开新的全屏容器。
+
+
+
+#### 后台管理系统
+
+###### 更新模块
+
+提供新版本的模块版本号即可
+
+###### 增加模块
+
+增加完整的模块配置
+
+###### 下线模块
+
+设置模块的del属性为Y
+
+
+
+$更新时间: 2016-8-25 
