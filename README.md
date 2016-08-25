@@ -6,8 +6,11 @@ Android 参考SDK [WebViewJavascriptBridge](https://github.com/gzsll/WebViewJava
 
 
 
-
 ** 相关文章 **
+
+- [Hybrid 模块本地化解决方案](https://github.com/90Team/jsbridge/blob/master/HybridAPI.md)
+
+
 - [Hybrid 开发文档](http://johnwong.github.io/mobile/2015/04/20/cross-platform-and-hybrid.html)
 - [HTML/Android/Chrome-WebViewJavascriptBridge](https://github.com/fangj/WebViewJavascriptBridge)
 
@@ -544,4 +547,4 @@ iOS目前支持： tel:// http:// ….系统支持的这里都行, 包括跳转�
 | ------- | ---------- | ------------------------------------ |
 | bounced | String<必须> | 是否可以回弹 值： yes, no 字串, webView默认为可以回弹 |
 
-​
+
