@@ -448,7 +448,7 @@ setupWebViewJavascriptBridge(function(bridge){
 
 
 
-#### [10.1打开窗口(Native)](#openWindow)
+## 10.1打开窗口(Native)
 
 接口: `openWindow`
 
