@@ -462,8 +462,9 @@ setupWebViewJavascriptBridge(function(bridge){
 identifier: 先去写死的Map中查询对应关系, 如果 map[identifier] 不存在, 如果 identifier为Activity名称就直接使用反射进行跳转。
 
 Map
+
 | identifier | param |
-| -----------| ------|
+| ------- | ------|
 | item | {id:"3232123232123"}|
 
 
