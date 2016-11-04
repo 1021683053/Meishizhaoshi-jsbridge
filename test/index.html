@@ -98,6 +98,9 @@
                 <div class="aui-col-xs-6">
                     <button class="setRightItem">setRightItem</button>
                 </div>
+                <div class="aui-col-xs-6">
+                    <button class="openItem">openItem</button>
+                </div>
             </div>
         </section>
 
@@ -284,6 +287,10 @@
         });
         $('.setRightItem').on("click", function(){
             M.EnableRight("李帅是傻逼！");
+        });
+
+        $('.openItem').on("click", function(){
+            M.sys('item', {id:'1610170001328373', type:"0"});
         });
     });
 
