@@ -179,6 +179,15 @@ M.parent(`object`);
 ```
 --- 注：其他例子请看源码或者例子！ ---
 
+## URL Scheme
+
+Android Student : `hurting://`;
+IOS Student : `rmxs.meishizhaoshi://`
+
+| url | 注释 |
+| --- | --- |
+| 安卓:item?id={id} IOS: postDetail?type={type}&id={id} | 跳转到岗位详情 |
+
 
 ## 功能需求
 
