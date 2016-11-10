@@ -524,10 +524,10 @@
             }
 
             // 开启／关闭橡皮筋
-            if( !settings.bomb ){
+            if( !settings.bomb && !isFunction(pullcb) ){
                 self.disbomb();
             }
-            
+
             cb();
         });
     };

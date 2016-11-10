@@ -79,11 +79,11 @@ use in html
 defaults   
 ```javascript
 {
-    bomb: true,  //是否开启webview橡皮筋 ，默认开启  value： true/false
+    bomb: true,  //是否开启webview橡皮筋 ，默认开启(若pullcb开启，默认此项开启)  value： true/false
     text: false,   //导航栏右侧造作按钮文字（没有回调）  value: false/String
     textcb: false,    //导航栏右侧操作按钮回调    value: false/ Function
     pullcb: false,   //开启下拉刷新（回调）   value: false/ Function
-    soncb: false    //开启子窗口回调顶部窗口   value: false/ Function
+    soncb: false    //开启子窗口回调顶部窗口   value: false/ Function 
 }
 ```
 
