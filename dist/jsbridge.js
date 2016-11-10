@@ -34,7 +34,6 @@
     bridge.native = window.WebViewJavascriptBridge || null;
 
     bridge.init = function(){
-        console.log(arguments);
         var cb = ([].slice.call(arguments))[0];
         if( bridge.native ){
             if( cb ){cb()};
@@ -60,11 +59,6 @@
     bridge.client = client;
     bridge.isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1;
     bridge.isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-    bridge.base = "http://10.0.0.1:8080";
-
-    //初始化
-    // bridge.init();
-
     //柯理化
     function currying(fn) {
         var args = [].slice.call(arguments, 1);
@@ -87,15 +81,7 @@
     };
 
     //M暴露对外接口
-    var M = function(){
-        this.config = [
-            { name: 'pull', event: 'refreshTriggered', type: 'on' },
-            { name: 'close', event: 'childenClose', type: 'on' },
-            { name: 'right', event: 'rightItemOnClick', type: 'on' },
-            { name: 'enableRight', event: 'EnableRight', type: 'emit' },
-            { name: 'enablePull', event: 'EnablePull', type: 'emit' }
-        ]
-    };
+    var M = function(){};
     M.prototype = bridge;
 
     // API请求map
@@ -179,15 +165,8 @@
     };
 
     //增添配置表
-    function configure( config, name, flag){
-        for( var i=0; i<config.length; i++ ){
-            if( config[i].name == name && config[i].type == "on" ){
-                config[i].cb = flag;
-            }
-            if( config[i].name == name && config[i].type == "emit" ){
-                config[i].enable = flag;
-            }
-        }
+    function configure( config ){
+
     };
 
     //继承
@@ -201,7 +180,7 @@
             });
         })
         return dest;
-    }
+    };
 
     //分享
     M.prototype.share = function(){
@@ -469,7 +448,7 @@
     };
 
     //开启导航按钮
-    M.prototype.EnableRight = function(text){
+    M.prototype.enright = function(text){
         var param = {
             title: "确定",
             titleHexColor: "#000000",
@@ -481,44 +460,74 @@
     };
 
     //下拉功能开启
-    M.prototype.EnablePull = function(){
+    M.prototype.enpull = function(){
         var args = build_args(arguments, "addPullRefreshWebView" );
         this.emit.apply(bridge, args);
     };
 
     //关闭橡皮筋
-    M.prototype.DisableElastic = function(){
+    M.prototype.disbomb= function(){
         var param = {};
         param.bounced = "no";
         this.emit('canBounced', param, function(){});
     };
 
+    // 默认configure
+    var settings = {
+        bomb: true,
+        text: false,
+        textcb: false,
+        pullcb: false,
+        soncb: false,
+    };
+
     // 开启配置
     M.prototype.configure = function(options){
-        var config = this.config;
-        if( !isObject(options) ){
-            return this;
-        }
-        for( var key in options ){
-            configure(config, key, options[key]);
+        console.log(options);
+        for( key in  options){
+            settings[key] = options[key]
         }
         return this;
     };
 
     //加载完成
     M.prototype.onload = function(){
-        var cb = ([].slice.call(arguments))[0];
-        var self = this;
-        var config = this.config;
+        var cb = ([].slice.call(arguments))[0],
+            self = this;
         this.init(function(){
-            for( var i=0; i< config.length; i++ ){
-                if( config[i]['cb'] ){
-                    self.on(config[i]['event'], config[i]['cb'] );
-                }
-                if( config[i]['enable'] ){
-                    self[config[i]['event']]( config[i]['enable'] );
-                }
+
+            // 启动配置
+
+            // 右键按钮文字
+            if( settings.text && isString(settings.text) ){
+                self.enright( settings.text );
+            };
+
+            // 右键回调
+            if( settings.textcb && isFunction(settings.textcb) ){
+                self.on('rightItemOnClick', settings.textcb);
+            };
+
+            // 开启下拉刷新功能
+            if( settings.pullcb && isFunction( settings.pullcb ) ){
+                self.enpull();
+                self.on('refreshTriggered', function(){
+                    settings.pullcb(function(){
+                        self.stoppull();
+                    });
+                });
+            };
+
+            // 开启子层回调
+            if( settings.soncb && isFunction( settings.soncb ) ){
+                self.on("childenClose", soncb );
             }
+
+            // 开启／关闭橡皮筋
+            if( !settings.bomb ){
+                self.disbomb();
+            }
+            
             cb();
         });
     };

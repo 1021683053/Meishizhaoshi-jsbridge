@@ -67,6 +67,28 @@ use in html
 <script src="http://assets.meishizhaoshi.com/jsbridge.js" charset="utf-8" />
 <script src="http://assets.meishizhaoshi.com/jsbridge.min.js" charset="utf-8" />
 ```
+
+## Configure
+
+```javascript
+  M.configure(options);
+```
+
+## Options
+
+defaults   
+```javascript
+{
+    bomb: true,  //是否开启webview橡皮筋 ，默认开启  value： true/false
+    text: false,   //导航栏右侧造作按钮文字（没有回调）  value: false/String
+    textcb: false,    //导航栏右侧操作按钮回调    value: false/ Function
+    pullcb: false,   //开启下拉刷新（回调）   value: false/ Function
+    soncb: false    //开启子窗口回调顶部窗口   value: false/ Function
+}
+```
+
+
+
 ## JavaScript API
 ```javascript
 
@@ -142,7 +164,7 @@ M.POST(`server`, `api`, `callback`);
 
 /* 打开下拉刷新功能
  */
-M.EnablePull();
+M.enpull();
 
 
 /* 完成下拉来刷新
@@ -170,7 +192,13 @@ M.close();
 /* 右侧按钮设置
  * text
  */
-M.EnableRight(`text`);
+M.enright(`text`);
+
+
+/* 关闭橡皮筋
+ */
+M.disbomb();
+ 
 
 /* 调用复层注册的 childenClose方法
  * object

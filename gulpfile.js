@@ -9,7 +9,6 @@ var sources = [
     'src/util.js',
     'src/set.js',
     'src/m.js',
-    // 'src/exports.js',
     'src/outro.js'
 ];
 
@@ -22,6 +21,10 @@ gulp.task('bulid', function(){
         }))
         .pipe( rename('jsbridge.min.js') )
         .pipe( gulp.dest('dist/') );
+});
+
+gulp.task('default', function(){
+    gulp.watch('src/*.js', ['bulid']);
 });
 
 gulp.task('upload', function(){

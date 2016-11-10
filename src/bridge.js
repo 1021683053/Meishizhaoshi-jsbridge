@@ -6,7 +6,6 @@
     bridge.native = window.WebViewJavascriptBridge || null;
 
     bridge.init = function(){
-        console.log(arguments);
         var cb = ([].slice.call(arguments))[0];
         if( bridge.native ){
             if( cb ){cb()};
@@ -32,7 +31,3 @@
     bridge.client = client;
     bridge.isAndroid = UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1;
     bridge.isiOS = !!UA.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-    bridge.base = "http://10.0.0.1:8080";
-
-    //初始化
-    // bridge.init();

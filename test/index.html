@@ -183,28 +183,32 @@
 
         </section>
 
-
     </body>
 </html>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
 <script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.js" charset="utf-8"></script>
 <script type="text/javascript">
+    var textcb = function(){
+        alert("Are you ok?");
+    };
+    var pullcb = function(close){
+        // alert("pullcb");
+        setTimeout(function() {
+            close();
+        }, 3000);
+    };
+    var soncb = function(res){
+        alert( JSON.stringify(res) );
+    };
+    var JSB = M.configure({
+        text: "提交",
+        textcb: textcb,
+        pullcb: pullcb,
+        soncb: soncb,
+        bomb: false
+    });
 
-    M.configure({
-        right: function(){
-            alert(1);
-        },
-        pull: function(){
-            setTimeout(function () {
-                M.stoppull();
-            }, 3000);
-        },
-        close: function(response){
-            $("#json").html(JSON.stringify( response));
-        },
-        enableRight: "保存",
-        enablePull: true
-    }).onload(function(){
+    JSB.onload(function(){
         $(".header p").text(JSON.stringify( navigator.userAgent ));
 
         $('.showShareView').on("click", function(){
@@ -258,11 +262,11 @@
         });
 
         $('.addPullRefreshWebView').on("click", function(){
-            M.EnablePull();
+            M.enpull();
         });
 
         $('.stopPullRefreshWebView').on("click", function(){
-            M.stopull();
+            M.stoppull();
         });
 
         $('.openSysURL').on("click", function(){
@@ -286,7 +290,7 @@
             M.link("/test/communication.html");
         });
         $('.setRightItem').on("click", function(){
-            M.EnableRight("李帅是傻逼！");
+            M.enright("李帅是傻逼！");
         });
 
         $('.openItem').on("click", function(){
@@ -300,10 +304,5 @@
             threshold : 1
         });
     });
-
-
-
-
-
 
 </script>
