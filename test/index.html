@@ -22,7 +22,7 @@
                 src: url('fonts/TitilliumWeb-Regular.ttf') format('truetype');
             }
             *{
-                font-family:"TitilliumWeb", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif !important;
+                font-family:"TitilliumWeb", "Heiti SC", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif !important;
             }
             button{ display: block; width: 100%; text-align: center; padding: 10px 0;}
             .header {
@@ -107,6 +107,9 @@
                 </div>
                 <div class="aui-col-xs-6">
                     <button class="openItem">openItem</button>
+                </div>
+                <div class="aui-col-xs-6">
+                    <button class="disbomb">关闭橡皮筋</button>
                 </div>
             </div>
         </section>
@@ -208,11 +211,11 @@
         alert( JSON.stringify(res) );
     };
     var JSB = M.configure({
-        text: "提交",
-        textcb: textcb,
-        pullcb: pullcb,
-        soncb: soncb,
-        bomb: false
+        // text: "提交",
+        // textcb: textcb,
+        // pullcb: pullcb,
+        // soncb: soncb,
+        // bomb: false
     });
 
     JSB.onload(function(){
@@ -302,6 +305,9 @@
 
         $('.openItem').on("click", function(){
             M.sys('item', {id:'1610170001328373', type:"0"});
+        });
+        $('.disbomb').on("click", function(){
+            M.disbomb();
         });
     });
 

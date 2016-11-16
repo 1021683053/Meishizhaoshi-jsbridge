@@ -442,7 +442,7 @@
             }
 
             // 开启／关闭橡皮筋
-            if( !settings.bomb && !isFunction(pullcb) ){
+            if( !settings.bomb ){
                 self.disbomb();
             }
 
