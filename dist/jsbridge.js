@@ -25,7 +25,12 @@
         };
     };
     var client = new Client('Meishizhaoshi', UA);
+    var error = "index.html";
 
+    if( !client || client.name != "Meishizhaoshi" ){
+        window.location.replace(error);
+        return false;
+    }
     //JS Bridge 桥梁构建
     var bridge = {};
 
