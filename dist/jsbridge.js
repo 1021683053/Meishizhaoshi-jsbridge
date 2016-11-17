@@ -28,7 +28,7 @@
     var error = "index.html";
 
     if( !client || client.name != "Meishizhaoshi" ){
-        window.location.replace(error+'?callback'+ encodeURI(window.location.href));
+        window.location.replace(error+'?callback='+ encodeURI(window.location.href));
         return false;
     }
     //JS Bridge 桥梁构建
