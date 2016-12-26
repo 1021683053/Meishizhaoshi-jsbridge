@@ -214,7 +214,7 @@ IOS Student : `rmxs.meishizhaoshi://`
 
 | url | 注释 |
 | --- | --- |
-| 安卓:item?id={id} IOS: postDetail?type={type}&id={id} | 跳转到岗位详情 |
+| 安卓:item?id={id} IOS: postDetail?type={type}&id={id} | 跳转到岗位详情, type=1 全职、实习, type=0 兼职 |
 
 
 ## 功能需求
